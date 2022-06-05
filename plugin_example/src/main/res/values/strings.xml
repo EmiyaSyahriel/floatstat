@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Float Stat Plugin Example</string>
+    <string name="plugin_name_rng">Random Number</string>
+    <string name="plugin_name_clock">Clock</string>
+    <string name="unknown_data_name">Unknown Data Name</string>
+</resources>

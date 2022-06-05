@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/plugin_selector_refresh"
+        android:icon="@android:drawable/ic_menu_day"
+        android:title="@string/selector_refresh_plugins" />
+    <item
+        android:id="@+id/plugin_selector_donate"
+        android:icon="@drawable/ic_donation"
+        android:title="@string/selector_donate" />
+</menu>

@@ -1,0 +1,87 @@
+<!-- For Canvas Usage, therefore it's created like an atlas instead of individual bitmap to decrease texture handle swapping frequency -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:viewportWidth="128" android:viewportHeight="64"
+    android:width="128dp" android:height="64dp">
+    <group android:name="grid">
+        <path android:strokeWidth="1" android:strokeColor="#0fff"
+            android:fillAlpha="0"
+            android:pathData="M0,0h128M0,32h128M0,64h128M0,96h128M0,128h128M0,0v128M32,0v128M64,0v128M96,0v128M128,0v128"/>
+
+        <path android:strokeWidth="0.7" android:strokeColor="#009f"
+            android:pathData="M0,16h128M0,48h128M0,80h128
+            M0,112h128M16,0v128M48,0v128M80,0v128M112,0v128"/>
+    </group>
+    <group android:name="row_1">
+        <group android:name="ic_battery" android:translateX="1" android:translateY="1">
+            <path android:fillColor="#ffffffff" android:pathData="
+        M 8 3 h 5 v -2 h 5 v 2 h 5 v 25 h -15 v -25 l 2 2 v 21 h 11 v -21 h -11 z
+        M 11 14 l 9 -4.5 v 15.5 h -9 z
+        "/>
+        </group>
+        <group android:name="ic_battery_charging" android:translateX="33" android:translateY="1">
+            <path android:fillColor="#ffffffff" android:pathData="
+        M 8 3 h 5 v -2 h 5 v 2 h 5 v 25 h -15 v -25 l 2 2 v 21 h 11 v -21 h -11 z
+        M 16 6 l -1 8 h 4 l -4 10 l 1 -8 h -4 z
+        "/>
+        </group>
+        <group android:name="ic_battery_warning" android:translateX="65" android:translateY="1">
+            <path android:fillColor="#ffffffff" android:pathData="
+        M 8 3 h 5 v -2 h 5 v 2 h 5 v 25 h -15 v -25 l 2 2 v 21 h 11 v -21 h -11 z
+        M 14 20 h 3 v 3 h -3 z
+        M 14 8 h 3 v 10 h -3 z
+        "/>
+        </group>
+        <group android:name="ic_memory" android:translateX="96" android:translateY="1">
+            <path android:fillColor="#ffffffff" android:pathData="
+        M2,8h28v12
+        h-2v2h-1v-2h-1v2h-1v-2h-1v2h-1v-2h-4v2h-1v-2h-1v2h-1v-2h-1v2h-1v-2h-1v2h-1v-2h-1v2h-1v-2
+        h-1v2h-1v-2h-1v2h-1v-2h-1v2h-1v-2
+        h-2v-12l2,2v8h24v-8h-24zm3,3v6h6v-6zm7,0v6h1v-6zm2,0v6h6v-6zm7,0v6h6v-6z
+        "/>
+        </group>
+    </group>
+    <!-- Row 2 -->
+    <group android:name="row_2" android:translateY="32">
+        <group android:name="ic_down_link" android:translateX="1" android:translateY="1">
+            <path android:fillColor="#ffffffff" android:pathData="
+            M 15 29 a 14 14 1 1 1 15 -15 h -2 a -12 -12 1 1 0 -13 13 z
+            M 5 16 a 12 12 1 0 1 10 -12 l 1 2 l -1 3 l 1 5 l -2 6 l -1 0 l -1 -6 z
+            M 18 8 l -1 1 l 3 1 l -1 -2 z
+            M 18 10 l -1 6 l 3 1 l -1 -5 z
+            M 24 29 l -5 -5 h 3 v -8 h 4 v 8 h 3 l -5 5 z
+        "/>
+        </group>
+        <group android:name="ic_down_up" android:translateX="33" android:translateY="1">
+            <path android:fillColor="#ffffffff" android:pathData="
+            M 15 29 a 14 14 1 1 1 15 -15 h -2 a -12 -12 1 1 0 -13 13 z
+            M 5 16 a 12 12 1 0 1 10 -12 l 1 2 l -1 3 l 1 5 l -2 6 l -1 0 l -1 -6 z
+            M 18 8 l -1 1 l 3 1 l -1 -2 z
+            M 18 10 l -1 6 l 3 1 l -1 -5 z
+            M 24 16 l -5 5 h 3 v 8 h 4 v -8 h 3 l 5 5 z
+        "/>
+        </group>
+        <group android:name="ic_temp_cpu" android:translateX="65" android:translateY="1">
+            <path android:fillColor="#ffffffff" android:pathData="
+            M7,6l-2,-2h2
+            v-2h1v2h1v-2h1v2h1v-2h1v2h1v-2h1v2h1v-2h1v2h1v-2h1v2h1v-2h1v2h1v-2h1v2h1v-2h1v2h2
+            v2
+            h2v1h-2v1h2v1h-2v1h2v1h-2v1h2v1h-2v1h2v1h-2v1h2v1h-2v1h2v1h-2v1h2v1h-2v1h2v1h-2v2
+            h-2
+            v2h-1v-2h-1v2h-1v-2h-1v2h-1v-2h-1v2h-1v-2h-1v2h-1v-2h-1v2h-1v-2h-1v2h-1v-2
+            h-1v2h-1v-2h-1v2h-1v-2h-2v-2
+            h-2v-1h2v-1h-2v-1h2v-1h-2v-1h2v-1h-2v-1h2v-1h-2v-1h2v-1h-2v-1h2v-1h-2v-1
+            h2v-1h-2v-1h2v-1h-2v-1h2v-2h2
+            v19h17v-17z
+            M8,7v15h15v-15z
+        "/>
+        </group>
+        <group android:name="ic_temp_battery" android:translateX="97" android:translateY="1">
+            <path android:strokeColor="#ffffffff" android:strokeWidth="2"
+                android:strokeLineJoin="round"
+                android:strokeLineCap="round"
+                android:pathData="
+            M 12 12 v 14 a 3 3 1 0 0 6 0 v -14 a 5 5 1 1 0 -6 0 z m 3 2 v 12"/>
+        </group>
+    </group>
+
+</vector>

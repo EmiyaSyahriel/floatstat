@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="id.psw.floatstat">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <application
+        android:allowBackup="true"
+        android:name=".App"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/Theme.TemperatureMonitor"
+        android:supportsRtl="true"
+        >
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <service
+            android:name=".FloatWindowService"
+            android:enabled="true"
+            android:label="@string/svc_name"
+            android:exported="false"
+            >
+            <intent-filter>
+                <action android:name="id.psw.temperamon.action.VISIBILITY"/>
+                <action android:name="id.psw.temperamon.action.EDIT"/>
+                <action android:name="id.psw.temperamon.action.CLOSE"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".InternalStatProviderService"
+            android:enabled="true"
+            android:label="@string/internal_stat_service_name"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="id.psw.floatstat.action.START_PLUGIN"/>
+                <category android:name="id.psw.floatstat.category.PLUGIN"/>
+            </intent-filter>
+        </service>
+        <provider
+            android:authorities="id.psw.floatstat.InternalIconProvider"
+            android:name=".InternalIconProvider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            />
+    </application>
+    <queries>
+        <package android:name="id.psw.floatstat"/>
+        <intent>
+            <category android:name="id.psw.floatstat.category.PLUGIN"/>
+        </intent>
+    </queries>
+
+</manifest>

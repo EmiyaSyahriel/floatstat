@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Floating Stats</string>
+    <string name="svc_name">Floating Stat Window Service</string>
+    <string name="err_not_yet_allowed">App is not yet allowed to display over other app</string>
+    <string name="allow_please">Please allow this app to be displayed over other apps</string>
+    <string name="temperamon_start">Starting Temperature Monitor, all controls are available on Notification Bar unless you hide it.</string>
+    <string name="notif_channel_id">Floating Window Control</string>
+    <string name="internal_plugin_name">Internal</string>
+    <string name="unknown">\???</string>
+    <string name="internal_stat_uplink">Upload Speed</string>
+    <string name="internal_stat_battery_info">Battery Level</string>
+    <string name="internal_stat_downlink">Download Speed</string>
+    <string name="internal_stat_ram_usage">RAM Usage</string>
+    <string name="internal_stat_temp_bat">Battery Temperature</string>
+    <string name="internal_stat_temp_cpu">CPU Temperature</string>
+    <string name="internal_stat_service_name">Internal Status Data Provider</string>
+    <string name="plugin_icon_error">Icon of Data %1$s from Plugin %2$s is corrupted, or maybe invalid</string>
+    <string name="what_what">\???</string>
+    <string name="title_plugin_selector">Plugin Selector</string>
+    <string name="up_arrow">↑</string>
+    <string name="dn_arrow">↓</string>
+    <string name="selector_refresh_plugins">Refresh Plugins</string>
+    <string name="selector_donate">Contribute</string>
+</resources>

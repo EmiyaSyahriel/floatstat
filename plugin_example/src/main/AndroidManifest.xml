@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="id.psw.floatstat.plugin_example">
+    <!--
+        This app did not need icon due to being an example app :)
+    -->
+    <application
+        android:allowBackup="true"
+        android:name=".PluginApp"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        tools:ignore="MissingApplicationIcon">
+        <service android:name=".SamplePluginService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="id.psw.floatstat.action.START_PLUGIN"/>
+                <category android:name="id.psw.floatstat.category.PLUGIN"/>
+            </intent-filter>
+        </service>
+        <!--
+            the provider should always be exported, as the main app would need to use the provider
+            to obtain icon
+        -->
+        <provider
+            android:authorities="id.psw.floatstat.plugin_example.IconProvider"
+            android:name=".IconProvider"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:enabled="true"
+            tools:ignore="ExportedContentProvider" />
+    </application>
+    <queries>
+        <package android:name="id.psw.floatstat"/>
+        <intent>
+            <category android:name="id.psw.floatstat.category.PLUGIN"/>
+        </intent>
+    </queries>
+</manifest>
