@@ -31,5 +31,8 @@ much energy to roll over or is designed to work by constantly trampling your toe
 
 For some more info, See [Why](readme/WHY.MD)
 
+## Contributions
+See [Contributions](readme/CONTRIBS.MD)
+
 ## License
-Apache License 2.0, with some file is under Public Domain.
+Apache License 2.0 (read [here](LICENSE.md)), with some file is under Public Domain stated inside the file.
