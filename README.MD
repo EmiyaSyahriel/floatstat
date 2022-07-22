@@ -19,7 +19,7 @@ for Android, sprinkled with my (and some of the contributors) ego.
 ## Why?
 Have you ever seen this kind of dialog?
 
-![Some example of annoying ad push notification confirmation dialog](1.jpg)
+![Some example of annoying ad push notification confirmation dialog](readme/1.jpg)
 
 On some Phone / ROM (e.g My Nokia 6.1 Plus running Android 10), this kind of dialog cannot be
 responded when there is a floating window active due to some security concern. When you try to
