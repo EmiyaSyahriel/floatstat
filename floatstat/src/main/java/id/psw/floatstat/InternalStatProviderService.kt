@@ -216,14 +216,14 @@ class InternalStatProviderService : Service() {
         override val iconId: Int = IC_UPLINK
 
         override val dataGetter: Long
-            get() = TrafficStats.getMobileTxBytes()
+            get() = TrafficStats.getTotalTxBytes()
     }
 
     private val dnLinkData = object : IDeltaNetPlugin(){
         override val iconId: Int = IC_DOWNLINK
 
         override val dataGetter: Long
-            get() = TrafficStats.getMobileRxBytes()
+            get() = TrafficStats.getTotalRxBytes()
     }
 
     private val cpuTempData = object : IPlugin(){
@@ -377,10 +377,6 @@ class InternalStatProviderService : Service() {
                 }
             }
             return sb.toString()
-        }
-
-        override fun getPluginName(): String {
-            return getString(R.string.internal_plugin_name)
         }
 
         override fun getDataName(dataId: String?): String {

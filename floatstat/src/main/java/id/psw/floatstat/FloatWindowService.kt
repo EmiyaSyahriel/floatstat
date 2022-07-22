@@ -2,6 +2,7 @@ package id.psw.floatstat
 
 import android.annotation.SuppressLint
 import android.app.*
+import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.*
@@ -37,6 +38,15 @@ class FloatWindowService : Service() {
         const val ACTION_CLOSE = "id.psw.temperamon.action.CLOSE"
         const val ACTION_EXPAND = "id.psw.temperamon.action.EXPAND"
         private const val allowEditor: Boolean = true
+
+        fun startServiceS(ctx: Context){
+            val i = Intent(ctx, FloatWindowService::class.java)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                ctx.startForegroundService(i)
+            }else{
+                ctx.startService(i)
+            }
+        }
     }
 
     private var vMainView : StatusView? = null
@@ -138,19 +148,19 @@ class FloatWindowService : Service() {
         val notifFlag = if(sdkAtLeast(Build.VERSION_CODES.M)) PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT else 0
 
         val notif = NotificationCompat.Builder(this, NOTIF_ID)
-            .setContentTitle("Floating Stats is running")
-            .setContentText("Expand this notification to control the floating widget")
+            .setContentTitle(getString(R.string.float_stat_notif_title))
+            .setContentText(getString(R.string.float_stat_notif_desc))
             .setSmallIcon(R.drawable.ic_main_notification)
             .setSilent(true)
             .setContentIntent(PendingIntent.getService(this, INT_ACTION_EXPAND,
                     Intent(ACTION_EXPAND), notifFlag))
-            .addAction(android.R.drawable.ic_menu_view, "Show/Hide",
+            .addAction(android.R.drawable.ic_menu_view, getString(R.string.float_stat_notif_visibility),
                 PendingIntent.getService(this, INT_ACTION_VISIBILITY,
                     Intent(ACTION_VISIBILITY), notifFlag))
-            .addAction(android.R.drawable.ic_menu_edit, "Edit",
+            .addAction(android.R.drawable.ic_menu_edit, getString(R.string.float_stat_notif_edit),
                 PendingIntent.getService(this, INT_ACTION_EDIT,
                     Intent(ACTION_EDIT), notifFlag))
-            .addAction(android.R.drawable.ic_menu_close_clear_cancel, "Close",
+            .addAction(android.R.drawable.ic_menu_close_clear_cancel, getString(R.string.float_stat_notif_close),
                 PendingIntent.getService(this, INT_ACTION_CLOSE,
                     Intent(ACTION_CLOSE), notifFlag))
             .build()
@@ -236,18 +246,24 @@ class FloatWindowService : Service() {
                 setOnClickListener { btn ->
                     PopupMenu(context, this).apply {
                         menuInflater.inflate(R.menu.selector_menu, menu)
+                        menu.findItem(R.id.plugin_selector_bootstart).isChecked = app.startOnBoot
+
                         setOnMenuItemClickListener {
                             when(it.itemId){
                                 R.id.plugin_selector_donate -> { app().openDonateUri() }
                                 R.id.plugin_selector_refresh -> {
                                     editWindow?.cancel()
                                     app().refreshPluginList()
-                                    Toast.makeText(app, "Updating Data and Plugin List, The data selector list will re-open after 1 second,", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(app, context.getString(R.string.plugin_selector_updating_warning), Toast.LENGTH_LONG).show()
                                     Timer("UpdateWait", false).schedule(1000){
                                         wHandler.post {
                                             openEditWindow()
                                         }
                                     }
+                                }
+                                R.id.plugin_selector_bootstart -> {
+                                    app.startOnBoot = !app.startOnBoot
+                                    app.savePreferences()
                                 }
                             }
                             true

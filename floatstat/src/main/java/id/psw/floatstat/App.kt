@@ -39,6 +39,7 @@ class App : Application() {
         const val PK_THREADED_UPDATE_FREQ = "KeseringanPembaruan"
         const val PK_ENABLED_PLUGIN = "TetambahanAktif"
         const val PK_DEFAULT_PLUGIN_DISPLAY = "TetambahanTampil"
+        const val PK_RUN_ON_STARTUP = "MulaiPasHidup"
     }
 
 
@@ -126,6 +127,7 @@ class App : Application() {
     }
 
     val pluginList = arrayListOf<PluginInfo>()
+    private val displayNames = mutableMapOf<ComponentName, String>()
     private val pluginConnector = object : ServiceConnection {
         var hasBound = false
         private val TAG = "PluginQuery"
@@ -134,8 +136,9 @@ class App : Application() {
             if(service != null && name != null){
                 val asPlugin = IFloatStatDataPlugin.Stub.asInterface(service)
                 if(pluginList.count { it.name == name } == 0){
-                    Log.d(TAG, "$name -> ${asPlugin.pluginName}")
-                    val vInfo = PluginInfo(asPlugin, name, asPlugin.pluginName)
+                    val pluginDspName = displayNames[name] ?: name.toString() ?: "???"
+                    Log.d(TAG, "$name -> $pluginDspName")
+                    val vInfo = PluginInfo(asPlugin, name, pluginDspName)
                     asPlugin.dataIds.split(',').forEach {
                         val dName = asPlugin.getDataName(it)
                         val dInfo = PluginDataInfo(
@@ -158,21 +161,21 @@ class App : Application() {
     }
 
     private fun listPlugins(){
-        val i = Intent(ACTION_START_PLUGIN)
-        val pkgs = packageManager.queryIntentServices(i, 0)
+        val i = Intent(ACTION_START_PLUGIN).addCategory(CATEGORY_PLUGIN)
+        val dPkg = packageManager.queryIntentServices(i, 0)
         if(pluginConnector.hasBound){
             unbindService(pluginConnector)
             pluginConnector.hasBound = false
         }
         pluginList.clear()
 
-        pkgs.forEach {
+        dPkg.forEach {
             try{
+                val cName = ComponentName(it.serviceInfo.packageName, it.serviceInfo.name)
                 val sbi = Intent(ACTION_START_PLUGIN)
-                    .setComponent(ComponentName(it.serviceInfo.packageName, it.serviceInfo.name))
+                    .setComponent(cName)
                     .putExtra(PluginData.EXTRA_DATA_SENDER, packageName)
-
-
+                displayNames[cName] = it.serviceInfo.loadLabel(packageManager).toString()
                 if(!bindService(sbi, pluginConnector, BIND_AUTO_CREATE)){
                     Log.d("App", "Cannot bind ${it.serviceInfo.name}")
                 }
@@ -183,6 +186,7 @@ class App : Application() {
     }
 
     var shouldUpdate = false
+    var startOnBoot = false
 
     var reReadPreference = false
     val activePlugins = arrayListOf<PluginId>()
@@ -220,6 +224,7 @@ class App : Application() {
         if(defPlug != null){
             defaultPlugin = PluginId(defPlug)
         }
+        startOnBoot = pref.getBoolean(PK_RUN_ON_STARTUP, false)
     }
 
     fun savePreferences(){
@@ -229,6 +234,7 @@ class App : Application() {
             .putLong(PK_THREADED_UPDATE_FREQ, updateFrequency)
             .putString(PK_ENABLED_PLUGIN, activePluginIds.toString())
             .putString(PK_DEFAULT_PLUGIN_DISPLAY, defaultPlugin.toString())
+            .putBoolean(PK_RUN_ON_STARTUP, startOnBoot)
             .apply()
     }
 

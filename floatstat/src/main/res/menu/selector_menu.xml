@@ -9,4 +9,9 @@
         android:id="@+id/plugin_selector_donate"
         android:icon="@drawable/ic_donation"
         android:title="@string/selector_donate" />
+    <item
+        android:id="@+id/plugin_selector_bootstart"
+        android:icon="@drawable/ic_bootstart"
+        android:checkable="true"
+        android:title="@string/selector_bootstart" />
 </menu>

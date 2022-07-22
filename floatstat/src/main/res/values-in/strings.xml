@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kondilayang</string>
+    <string name="svc_name">Layanan Jendela Kondilayang</string>
+    <string name="err_not_yet_allowed">Aplikasi belum diizinkan untuk berjalan diatas aplikasi lain</string>
+    <string name="allow_please">Mohon untuk memperbolehkan aplikasi ini untuk berjalan diatas aplikasi lain</string>
+    <string name="temperamon_start">Memulai Kondilayang, semua kendali ada di Bilah Pemberitahuan, kecuali kalau anda sembunyikan.</string>
+    <string name="notif_channel_id">Kendali Kondilayang</string>
+    <string name="internal_plugin_name">Bawaan</string>
+    <string name="internal_stat_uplink">Kec. Unggah</string>
+    <string name="internal_stat_downlink">Kec. Unduh</string>
+    <string name="internal_stat_battery_info">Tingkat Baterai</string>
+    <string name="internal_stat_ram_usage">P.gunaan RAM</string>
+    <string name="internal_stat_temp_bat">Suhu Baterai</string>
+    <string name="internal_stat_temp_cpu">Suhu CPU</string>
+    <string name="internal_stat_service_name">Pemberi Data Bawaan</string>
+    <string name="plugin_icon_error">Icon untuk data %1$s dari Pengaya %2$s rusak, atau mungkin tidak sah</string>
+    <string name="title_plugin_selector">Pengatur Pengaya</string>
+    <string name="selector_refresh_plugins">Perbarui Pengaya</string>
+    <string name="selector_donate">Ikut Andil</string>
+    <string name="svc_name_bootstart">Layanan Automulai Kondilayang</string>
+    <string name="selector_bootstart">Mulai saat boot</string>
+    <string name="plugin_selector_updating_warning">Memperbarui daftar pengaya data, pengatur pengaya akan dibuka lagi dalam 1 detik.</string>
+    <string name="float_stat_notif_title">Kondilayang sedang berjalan</string>
+    <string name="float_stat_notif_desc">Perluas pemberitahuan ini untuk menampilkan kendali jendela layang</string>
+    <string name="float_stat_notif_visibility">Tampil/Sembunyi</string>
+    <string name="float_stat_notif_edit">Ubah</string>
+    <string name="float_stat_notif_close">Tutup</string>
+</resources>

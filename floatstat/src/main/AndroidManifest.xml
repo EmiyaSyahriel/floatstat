@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <application
         android:allowBackup="true"
@@ -41,7 +42,7 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="id.psw.floatstat.action.START_PLUGIN"/>
-                <category android:name="id.psw.floatstat.category.PLUGIN"/>
+                <category android:name="id.psw.floatstat.category.DATA_PLUGIN"/>
             </intent-filter>
         </service>
         <provider

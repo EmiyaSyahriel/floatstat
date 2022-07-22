@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Floating Stats</string>
+    <string name="app_name">Floating Stat</string>
     <string name="svc_name">Floating Stat Window Service</string>
     <string name="err_not_yet_allowed">App is not yet allowed to display over other app</string>
     <string name="allow_please">Please allow this app to be displayed over other apps</string>
-    <string name="temperamon_start">Starting Temperature Monitor, all controls are available on Notification Bar unless you hide it.</string>
+    <string name="temperamon_start">Starting Floating Stats, all controls are available on Notification Bar unless you hide it.</string>
     <string name="notif_channel_id">Floating Window Control</string>
     <string name="internal_plugin_name">Internal</string>
-    <string name="unknown">\???</string>
+    <string name="unknown" translatable="false">\???</string>
     <string name="internal_stat_uplink">Upload Speed</string>
     <string name="internal_stat_battery_info">Battery Level</string>
     <string name="internal_stat_downlink">Download Speed</string>
@@ -15,10 +15,18 @@
     <string name="internal_stat_temp_cpu">CPU Temperature</string>
     <string name="internal_stat_service_name">Internal Status Data Provider</string>
     <string name="plugin_icon_error">Icon of Data %1$s from Plugin %2$s is corrupted, or maybe invalid</string>
-    <string name="what_what">\???</string>
+    <string name="what_what" translatable="false">\???</string>
     <string name="title_plugin_selector">Plugin Selector</string>
-    <string name="up_arrow">↑</string>
-    <string name="dn_arrow">↓</string>
+    <string name="up_arrow" translatable="false">↑</string>
+    <string name="dn_arrow" translatable="false">↓</string>
     <string name="selector_refresh_plugins">Refresh Plugins</string>
     <string name="selector_donate">Contribute</string>
+    <string name="svc_name_bootstart">Start FloatStat on Boot</string>
+    <string name="selector_bootstart">Start on Boot</string>
+    <string name="plugin_selector_updating_warning">Updating data plugin list, The data selector list will re-open after 1 second.</string>
+    <string name="float_stat_notif_title">Floating Stats is running</string>
+    <string name="float_stat_notif_desc">Expand this notification to control the floating widget</string>
+    <string name="float_stat_notif_visibility">Show/Hide</string>
+    <string name="float_stat_notif_close">Close</string>
+    <string name="float_stat_notif_edit">Edit</string>
 </resources>

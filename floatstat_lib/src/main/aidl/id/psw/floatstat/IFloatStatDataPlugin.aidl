@@ -25,7 +25,6 @@ interface IFloatStatDataPlugin {
     * e.g : "now_playing_time,battery_time"
     */
     String getDataIds();
-    String getPluginName();
     String getDataName(String dataId);
     PluginData getData(String dataId);
     void requestStop();

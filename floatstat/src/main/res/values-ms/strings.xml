@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StatLayang</string>
+    <string name="svc_name">Perkhidmatan Tingkap StatLayang</string>
+    <string name="err_not_yet_allowed">Apl belum dibenarkan untuk dipaparkan di atas apl lain</string>
+    <string name="allow_please">Sila benarkan apl ini dipaparkan di atas apl lain</string>
+    <string name="temperamon_start">Memulakan Statistik Terapung, semua kawalan tersedia pada Bar Pemberitahuan melainkan anda menyembunyikannya.</string>
+    <string name="notif_channel_id">Kawalan Tingkap Terapung</string>
+    <string name="internal_plugin_name">Lalai</string>
+    <string name="internal_stat_uplink">Kelajuan M. Naik</string>
+    <string name="internal_stat_battery_info">Tahap Bateri</string>
+    <string name="internal_stat_downlink">Kelajuan M. Turun</string>
+    <string name="internal_stat_ram_usage">P.gunaan RAM</string>
+    <string name="internal_stat_temp_bat">Suhu Bateri</string>
+    <string name="internal_stat_temp_cpu">Suhu CPU</string>
+    <string name="internal_stat_service_name">Pembekal Data Status Lalai</string>
+    <string name="plugin_icon_error">Ikon Data %1$s daripada Pemalam %2$s rosak, atau mungkin tidak sah</string>
+    <string name="title_plugin_selector">Pemilih Pemalam</string>
+    <string name="selector_refresh_plugins">Muat Semula Pemalam</string>
+    <string name="selector_donate">Sumbangkan</string>
+    <string name="svc_name_bootstart">Perkhidmatan But StatLayang</string>
+    <string name="selector_bootstart">Mulakan Semasa But</string>
+    <string name="plugin_selector_updating_warning">Mengemas kini senarai pemalam data, Senarai pemilih data akan dibuka semula selepas 1 saat.</string>
+    <string name="float_stat_notif_title">StatLayang sedang berjalan</string>
+    <string name="float_stat_notif_desc">Kembangkan pemberitahuan ini untuk mengawal widget terapung</string>
+    <string name="float_stat_notif_visibility">Tunjukkan/Sembunyikan</string>
+    <string name="float_stat_notif_edit">Sunting</string>
+    <string name="float_stat_notif_close">Tutup</string>
+</resources>

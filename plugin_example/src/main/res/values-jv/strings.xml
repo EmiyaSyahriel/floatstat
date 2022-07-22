@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Contoh Pengaya Kondilayang</string>
+    <string name="plugin_name_rng">Jeneng Acak</string>
+    <string name="plugin_name_clock">Jam</string>
+    <string name="unknown_data_name">Lha embuh opo iki</string>
+</resources>

@@ -115,8 +115,6 @@ class SamplePluginService : Service() {
             }
             return sb.toString()
         }
-        override fun getPluginName(): String = getString(R.string.app_name)
-
         override fun getDataName(dataId: String?): String {
             return when(dataId){
                 PLUGIN_NAME_1 -> { getString(R.string.plugin_name_rng) }

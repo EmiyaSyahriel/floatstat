@@ -31,12 +31,7 @@ class MainActivity : Activity() {
     }
 
     private fun startWindowService() {
-        val i = Intent(applicationContext, FloatWindowService::class.java)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(i)
-        }else{
-            startService(i)
-        }
+        FloatWindowService.startServiceS(applicationContext)
     }
 
     private fun askPermission() {

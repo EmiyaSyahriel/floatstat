@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kondilayang</string>
+    <string name="svc_name">Layanan Chendela Kondilayang</string>
+    <string name="err_not_yet_allowed">Aplikasi dereng angsal izin kaagem muncul wonten inggilipun aplikasi lintu.</string>
+    <string name="allow_please">Panyuwunipun kaagem ngangsali aplikasi niki kanggo muncul wonton inggilipun aplikasi lintu.</string>
+    <string name="temperamon_start">Nglekasi Kondilayang, sedayaning kendali wonten ing Bilah Pemberitahuan sakmenika mboten sampean singitna.</string>
+    <string name="internal_plugin_name">Gawan</string>
+    <string name="notif_channel_id">Kendali Kondilayang</string>
+    <string name="internal_stat_uplink">Kec. Unggah</string>
+    <string name="internal_stat_battery_info">TIngkat Baterai</string>
+    <string name="internal_stat_downlink">Kec. Undhuh</string>
+    <string name="internal_stat_ram_usage">P.anggeman RAM</string>
+    <string name="internal_stat_temp_bat">Suhu Baterai</string>
+    <string name="internal_stat_temp_cpu">Suhu CPU</string>
+    <string name="internal_stat_service_name">Pangirim Data Gawan</string>
+    <string name="plugin_icon_error">Ikon kaagem data %1$s saking tetambah %2$s amoh, utawi mboten sah.</string>
+    <string name="title_plugin_selector">Pangatur Pengaya</string>
+    <string name="selector_refresh_plugins">Dhaftar ulang Pengaya</string>
+    <string name="selector_donate">Rerewang</string>
+    <string name="svc_name_bootstart">Layanan Panglekas Kondilayang</string>
+    <string name="selector_bootstart">Lekasi wayah Boot</string>
+    <string name="plugin_selector_updating_warning">Nganyari dhaftar pengaya data, Pangatur data dipun bikak wonten 1 detik mantun sak niki.</string>
+    <string name="float_stat_notif_title">Kondilayang sakmeniki mlaku</string>
+    <string name="float_stat_notif_desc">Bikak notifikasi niki kanggo mbukak kendali widget ngelayang</string>
+    <string name="float_stat_notif_visibility">Katon/Singit</string>
+    <string name="float_stat_notif_edit">Ubah</string>
+    <string name="float_stat_notif_close">Tutup</string>
+</resources>

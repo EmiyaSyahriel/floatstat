@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FloatStat</string>
+    <string name="svc_name">FloatStatのウィンドサービス</string>
+    <string name="internal_plugin_name">内部</string>
+    <string name="notif_channel_id">フローティングウィンドウコントロール</string>
+    <string name="temperamon_start">FloatStatを開始すると、非表示にしない限り、通知バーですべてのコントロールを使用できます。</string>
+    <string name="allow_please">このアプリが他のアプリの上に表示されることを許可してください</string>
+    <string name="err_not_yet_allowed">アプリを他のアプリの上に表示することはまだ許可されていません</string>
+    <string name="internal_stat_uplink">アップロードの速さ</string>
+    <string name="internal_stat_battery_info">バッテリーレベル</string>
+    <string name="internal_stat_downlink">ダウンロード速度</string>
+    <string name="internal_stat_ram_usage">RAM使用量</string>
+    <string name="internal_stat_temp_bat">バッテリー温度</string>
+    <string name="internal_stat_temp_cpu">CPU温度</string>
+    <string name="internal_stat_service_name">内部ステータスデータプロバイダー</string>
+    <string name="plugin_icon_error">プラグイン%2$sのデータ%1$sのアイコンが破損しているか、無効である可能性があります</string>
+    <string name="title_plugin_selector">プラグインセレクター</string>
+    <string name="selector_refresh_plugins">プラグインを更新する</string>
+    <string name="selector_donate">助ける</string>
+    <string name="svc_name_bootstart">FloatStatブートサービス</string>
+    <string name="selector_bootstart">起動時に開始</string>
+    <string name="plugin_selector_updating_warning">データプラグインリストを更新しています。データセレクターリストは1秒後に再び開きます。</string>
+    <string name="float_stat_notif_title">FloatStatsは現在実行中です</string>
+    <string name="float_stat_notif_desc">この通知を展開して、フローティングウィジェットを制御します</string>
+    <string name="float_stat_notif_visibility">表示/非表示</string>
+    <string name="float_stat_notif_edit">編集する</string>
+    <string name="float_stat_notif_close">終了する</string>
+</resources>

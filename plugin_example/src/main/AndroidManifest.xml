@@ -15,7 +15,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="id.psw.floatstat.action.START_PLUGIN"/>
-                <category android:name="id.psw.floatstat.category.PLUGIN"/>
+                <category android:name="id.psw.floatstat.category.DATA_PLUGIN"/>
             </intent-filter>
         </service>
         <!--
