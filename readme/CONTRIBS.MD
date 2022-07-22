@@ -2,9 +2,19 @@
 ## Main Project
 ### Translations
 You can provide translation for this app by at least have a git client and a text editor.
+Some Android app did provide the git functionality e.g 
+[C4droid (Paid) - a C++ IDE with built-in Git](https://play.google.com/store/apps/details?id=com.n0n3m4.droidc&hl=in&gl=US) and
+[MGit (Free) - just git client, no text editor](https://play.google.com/store/apps/details?id=com.manichord.mgit&hl=in&gl=US)
 
-- Clone this repository somewhere in your device
-- Copy the  
+- Fork and clone this repository somewhere in your device
+- Create a folder in `(ProjectRoot)/floatstat/src/main/res/` with format `values-(language_id)-(optional_country_id)` 
+  (e.g `values-en-UK` for British English)
+- Copy `values.xml` from `(ProjectRoot)/floatstat/src/main/res/values` and put it inside your newly created folder
+- Do the translation work.
+- Add your file to the git repository, do a commit, push the change to your repository
+- Send a Pull Request to this repository. with this, We can check whether the 
+  translated file format in a good condition or not.
+- If everything is fine, We will approve your translation and merge the changes to the main repository.
 
 ## Plugin
 A Plugin for this app, in it's app package, should have at least : 
