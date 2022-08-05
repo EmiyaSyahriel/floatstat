@@ -40,6 +40,7 @@ class App : Application() {
         const val PK_ENABLED_PLUGIN = "TetambahanAktif"
         const val PK_DEFAULT_PLUGIN_DISPLAY = "TetambahanTampil"
         const val PK_RUN_ON_STARTUP = "MulaiPasHidup"
+        const val PK_HIDE_ON_TAP = "HideTap"
     }
 
 
@@ -191,6 +192,7 @@ class App : Application() {
     var reReadPreference = false
     val activePlugins = arrayListOf<PluginId>()
     var defaultPlugin = PluginId("","")
+    var hideOnTap = false
     lateinit var pref : SharedPreferences
 
     @SuppressLint("ApplySharedPref")
@@ -225,6 +227,7 @@ class App : Application() {
             defaultPlugin = PluginId(defPlug)
         }
         startOnBoot = pref.getBoolean(PK_RUN_ON_STARTUP, false)
+        hideOnTap = pref.getBoolean(PK_HIDE_ON_TAP, false)
     }
 
     fun savePreferences(){
@@ -235,6 +238,7 @@ class App : Application() {
             .putString(PK_ENABLED_PLUGIN, activePluginIds.toString())
             .putString(PK_DEFAULT_PLUGIN_DISPLAY, defaultPlugin.toString())
             .putBoolean(PK_RUN_ON_STARTUP, startOnBoot)
+            .putBoolean(PK_HIDE_ON_TAP, hideOnTap)
             .apply()
     }
 
@@ -273,7 +277,7 @@ class App : Application() {
             it.binder.requestStop()
         }
         unbindService(pluginConnector)
-        Log.d("", "Temperamon terminating...")
+        Log.d("App", "Temperamon terminating...")
         super.onTerminate()
     }
 
@@ -282,7 +286,9 @@ class App : Application() {
     }
 
     fun openDonateUri() {
-
+        val i = Intent(Intent.ACTION_VIEW)
+        i.data = Uri.parse("https://github.com/EmiyaSyahriel/floatstat/blob/master/readme/DONATE.MD")
+        startActivity(i)
     }
 
 }

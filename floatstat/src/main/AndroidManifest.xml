@@ -55,7 +55,8 @@
     <queries>
         <package android:name="id.psw.floatstat"/>
         <intent>
-            <category android:name="id.psw.floatstat.category.PLUGIN"/>
+            <action android:name="id.psw.floatstat.category.START_PLUGIN"/>
+            <category android:name="id.psw.floatstat.category.DATA_PLUGIN"/>
         </intent>
     </queries>
 

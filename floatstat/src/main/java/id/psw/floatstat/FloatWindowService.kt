@@ -90,8 +90,13 @@ class FloatWindowService : Service() {
         vWinMan = winMan
 
         mainView.setOnClickListener {
-            mainView.isExpanded = !mainView.isExpanded
-            app().shouldUpdate = true
+            val app = app()
+            if(app.hideOnTap){
+                vMainView?.visibility = View.GONE
+            }else{
+                mainView.isExpanded = !mainView.isExpanded
+                app.shouldUpdate = true
+            }
         }
 
         mainView.setOnTouchListener { _, e ->
@@ -110,8 +115,13 @@ class FloatWindowService : Service() {
                     viewParam.x = if(viewParam.x < 0) -w else w
 
                     if((currentTouch - mainView.initialTouch).length() < slop){ // Is Tap
-                        mainView.isExpanded = !mainView.isExpanded
-                        app().shouldUpdate = true
+                        val app = app()
+                        if(app.hideOnTap){
+                            vMainView?.visibility = View.GONE
+                        }else{
+                            mainView.isExpanded = !mainView.isExpanded
+                            app.shouldUpdate = true
+                        }
 
                         val sz = mainView.getSize()
                         viewParam.width = sz.x
@@ -188,10 +198,14 @@ class FloatWindowService : Service() {
                 openEditWindow()
             }
             ACTION_VISIBILITY -> {
-                vMainView?.visibility = when(vMainView?.visibility){
-                    View.VISIBLE -> View.GONE
-                    View.GONE -> View.VISIBLE
-                    else -> View.VISIBLE
+                if(app().hideOnTap){
+                    vMainView?.visibility = View.VISIBLE
+                }else{
+                    vMainView?.visibility = when(vMainView?.visibility){
+                        View.VISIBLE -> View.GONE
+                        View.GONE -> View.VISIBLE
+                        else -> View.VISIBLE
+                    }
                 }
             }
         }
@@ -244,9 +258,11 @@ class FloatWindowService : Service() {
             titleBar.findViewById<ImageButton>(R.id.menu_btn).apply {
                 colorFilter = PorterDuffColorFilter(cfColor, PorterDuff.Mode.SRC_IN)
                 setOnClickListener { btn ->
-                    PopupMenu(context, this).apply {
-                        menuInflater.inflate(R.menu.selector_menu, menu)
+                    PopupMenu(applicationContext, btn).apply {
+                        inflate(R.menu.selector_menu)
                         menu.findItem(R.id.plugin_selector_bootstart).isChecked = app.startOnBoot
+                        menu.findItem(R.id.plugin_selector_hide_on_tap).isChecked = app.hideOnTap
+                        show()
 
                         setOnMenuItemClickListener {
                             when(it.itemId){
@@ -265,10 +281,13 @@ class FloatWindowService : Service() {
                                     app.startOnBoot = !app.startOnBoot
                                     app.savePreferences()
                                 }
+                                R.id.plugin_selector_hide_on_tap -> {
+                                    app.hideOnTap = !app.hideOnTap
+                                    app.savePreferences()
+                                }
                             }
                             true
                         }
-                        show()
                     }
                 }
             }

@@ -14,4 +14,9 @@
         android:icon="@drawable/ic_bootstart"
         android:checkable="true"
         android:title="@string/selector_bootstart" />
+    <item
+        android:id="@+id/plugin_selector_hide_on_tap"
+        android:icon="@drawable/ic_hide_on_tap"
+        android:checkable="true"
+        android:title="@string/selector_hide_on_tap" />
 </menu>

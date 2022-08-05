@@ -26,4 +26,5 @@
     <string name="float_stat_notif_visibility">表示/非表示</string>
     <string name="float_stat_notif_edit">編集する</string>
     <string name="float_stat_notif_close">終了する</string>
+    <string name="selector_hide_on_tap">タップでかくして</string>
 </resources>
