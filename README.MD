@@ -3,18 +3,20 @@ Simple, plugin-based floating window to show some device status controllable via
 for Android, sprinkled with my (and some of the contributors) ego.
 
 ## Features
-- **Notification Control** - fast show/hide toggle
+- **Notification Control** - Fast show/hide toggle via Notification Center
+- **Quick Setings Tile** - Or by status bar
 - **Completely plugin-based** - Even the internal data provider is a plugin that have minimal 
   ties to the main floating service, See [Plugin Creation](readme/CONTRIBS.MD#plugin) for more info.  
 - **Simple** - Customizable, just not yet skinnable 
 
 ### Internal Data 
 - Network Traffic
-- *Kinda Accurate* SoC Temperature, but due to the size nature of a phone, battery temperature might be your best measure
+- *Kinda Accurate* SoC Temperature[^id1], but due to the size nature of a phone, battery temperature might be your best measure.
 - Battery Temperature
 - RAM Usage
 - Battery Percentage
 
+[^id1]: Only works on certain devices, Unsupported devices will only shows `???` text, so far only tested on Unisoc and Snapdragon devices with the result that it only works on Snapdragon devices.
 
 ## Why?
 Have you ever seen this kind of dialog?
