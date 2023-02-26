@@ -32,6 +32,9 @@ base classes for plugin creation for example :
 - `PluginIconProvider` (Base Class for Icon Provider)
 - `IFloatStatDataPlugin.Stub` (Base Binder for Plugin Service, Generated via AIDL)
 
+If the latest app version in the release page have no `floatstat_lib.aar`, that means that there is no change
+in the library and you can safely use the latest `floatstat_lib.aar` included with release before the latest release.
+
 For further example, you can examine the source code in the `plugin_example` directory 
 
 ### Without the library
