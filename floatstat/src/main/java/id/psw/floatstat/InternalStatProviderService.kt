@@ -62,7 +62,7 @@ class InternalStatProviderService : Service() {
             yArr.forEachIndexed { xIdx, id ->
                 val x = xIdx * iconSize
                 val y = yIdx * iconSize
-                val ctBmp = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ALPHA_8)
+                val ctBmp = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ARGB_8888)
                 val drawCnv = Canvas(ctBmp)
                 uvRect.set(x, y, x + iconSize, y + iconSize)
                 vpRect.set(0,0,iconSize,iconSize)
