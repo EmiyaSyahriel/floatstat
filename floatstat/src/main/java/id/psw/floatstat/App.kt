@@ -3,10 +3,12 @@ package id.psw.floatstat
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.*
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import id.psw.floatstat.plugins.PluginData
@@ -20,6 +22,8 @@ class App : Application() {
 
     private var keepRunning = true
     lateinit var iconProvider : InternalIconProvider
+    var isFloatServiceRunning = false
+    var isFloatWindowVisible = true
 
     companion object {
         private val speedClassByte = arrayOf("B","k","MB","GB","TB","PB","EB","ZB","YB")
@@ -41,6 +45,7 @@ class App : Application() {
         const val PK_DEFAULT_PLUGIN_DISPLAY = "TetambahanTampil"
         const val PK_RUN_ON_STARTUP = "MulaiPasHidup"
         const val PK_HIDE_ON_TAP = "HideTap"
+        const val PK_TILE_ADDED = "BeliPorselenGanWkwkwkwk"
     }
 
 
@@ -136,8 +141,8 @@ class App : Application() {
             hasBound = true
             if(service != null && name != null){
                 val asPlugin = IFloatStatDataPlugin.Stub.asInterface(service)
-                if(pluginList.count { it.name == name } == 0){
-                    val pluginDspName = displayNames[name] ?: name.toString() ?: "???"
+                if(pluginList.indexOfFirst { it.name == name } < 0){
+                    val pluginDspName = displayNames[name] ?: name.toString()
                     Log.d(TAG, "$name -> $pluginDspName")
                     val vInfo = PluginInfo(asPlugin, name, pluginDspName)
                     asPlugin.dataIds.split(',').forEach {
@@ -163,7 +168,11 @@ class App : Application() {
 
     private fun listPlugins(){
         val i = Intent(ACTION_START_PLUGIN).addCategory(CATEGORY_PLUGIN)
-        val dPkg = packageManager.queryIntentServices(i, 0)
+        val dPkg = if (Build.VERSION.SDK_INT >= 33) {
+            packageManager.queryIntentServices(i, PackageManager.ResolveInfoFlags.of(0L))
+        } else {
+            packageManager.queryIntentServices(i, 0)
+        }
         if(pluginConnector.hasBound){
             unbindService(pluginConnector)
             pluginConnector.hasBound = false
@@ -187,7 +196,23 @@ class App : Application() {
     }
 
     var shouldUpdate = false
-    var startOnBoot = false
+    var startOnBoot : Boolean
+        get() {
+            val cmp = ComponentName(applicationContext, BootStartReceiver::class.java)
+            val pm = applicationContext.packageManager
+            return pm.getComponentEnabledSetting(cmp) != PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+        }
+        set(value) {
+            val cmp = ComponentName(applicationContext, BootStartReceiver::class.java)
+            val pm = applicationContext.packageManager
+            pm.setComponentEnabledSetting(
+                cmp,
+                value.select(
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+                ), PackageManager.DONT_KILL_APP)
+        }
+
 
     var reReadPreference = false
     val activePlugins = arrayListOf<PluginId>()
@@ -272,11 +297,7 @@ class App : Application() {
     override fun onTerminate() {
         savePreferences()
         keepRunning = false
-        iconProvider.clearMemFile()
-        pluginList.forEach {
-            it.binder.requestStop()
-        }
-        unbindService(pluginConnector)
+        clearPlugins()
         Log.d("App", "Temperamon terminating...")
         super.onTerminate()
     }
@@ -289,6 +310,14 @@ class App : Application() {
         val i = Intent(Intent.ACTION_VIEW)
         i.data = Uri.parse("https://github.com/EmiyaSyahriel/floatstat/blob/master/readme/DONATE.MD")
         startActivity(i)
+    }
+
+    fun clearPlugins() {
+        iconProvider.clearMemFile()
+        unbindService(pluginConnector)
+        pluginList.forEach {
+            it.binder.requestStop()
+        }
     }
 
 }

@@ -2,11 +2,13 @@ package id.psw.floatstat
 
 import android.annotation.SuppressLint
 import android.app.*
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.*
 import android.os.*
+import android.service.quicksettings.TileService
 import android.view.*
 import android.widget.ImageButton
 import android.widget.PopupMenu
@@ -184,6 +186,8 @@ class FloatWindowService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+        app().isFloatServiceRunning = true
+        app().refreshPluginList()
         createNotification()
         createView()
     }
@@ -192,7 +196,8 @@ class FloatWindowService : Service() {
         when(intent?.action){
             ACTION_CLOSE -> {
                 stopSelf()
-                exitProcess(0)
+                if(sdkAtLeast(Build.VERSION_CODES.N)) SettingTileService.update(app())
+                app().clearPlugins()
             }
             ACTION_EDIT -> {
                 openEditWindow()
@@ -207,8 +212,10 @@ class FloatWindowService : Service() {
                         else -> View.VISIBLE
                     }
                 }
+                app().isFloatWindowVisible= vMainView?.visibility == View.VISIBLE
             }
         }
+        if(sdkAtLeast(Build.VERSION_CODES.N)) SettingTileService.update(app())
         return super.onStartCommand(intent, flags, startId)
     }
 
@@ -349,6 +356,7 @@ class FloatWindowService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        app().isFloatServiceRunning = false
         Toast.makeText(applicationContext, "Closing View", Toast.LENGTH_SHORT).show()
         if(vMainView != null){
             vWinMan?.removeView(vMainView)

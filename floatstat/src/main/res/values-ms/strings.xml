@@ -27,4 +27,9 @@
     <string name="float_stat_notif_edit">Sunting</string>
     <string name="float_stat_notif_close">Tutup</string>
     <string name="selector_hide_on_tap">Sembunyikan ktk Tap</string>
+    <string name="tile_started_no">Tahan untuk memulakan</string>
+    <string name="tile_started_pending">Memulakan…</string>
+    <string name="tile_visibility_hidden">Tap utk Tampilkan</string>
+    <string name="tile_visibility_visible">Tap utk Sembunyikan</string>
+    <string name="tile_visibility_pending">Mengubah keterlihatan…</string>
 </resources>

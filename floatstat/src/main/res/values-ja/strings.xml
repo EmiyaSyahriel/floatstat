@@ -27,4 +27,9 @@
     <string name="float_stat_notif_edit">編集する</string>
     <string name="float_stat_notif_close">終了する</string>
     <string name="selector_hide_on_tap">タップでかくして</string>
+    <string name="tile_visibility_pending">可視性を変更中…</string>
+    <string name="tile_visibility_visible">タップして隠し</string>
+    <string name="tile_visibility_hidden">タップして見える</string>
+    <string name="tile_started_pending">起動中…</string>
+    <string name="tile_started_no">タップホールドして開始</string>
 </resources>

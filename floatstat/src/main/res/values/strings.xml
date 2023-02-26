@@ -30,4 +30,9 @@
     <string name="float_stat_notif_close">Close</string>
     <string name="float_stat_notif_edit">Edit</string>
     <string name="selector_hide_on_tap">Hide on Tap</string>
+    <string name="tile_visibility_pending">Changing state...</string>
+    <string name="tile_visibility_visible">Tap to Hide</string>
+    <string name="tile_visibility_hidden">Tap to Show</string>
+    <string name="tile_started_pending">Starting...</string>
+    <string name="tile_started_no">App not started, Long tap to start</string>
 </resources>

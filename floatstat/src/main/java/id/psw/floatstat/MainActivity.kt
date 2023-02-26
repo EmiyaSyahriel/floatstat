@@ -1,8 +1,12 @@
 package id.psw.floatstat
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.StatusBarManager
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -22,7 +26,27 @@ class MainActivity : Activity() {
         }else{
             askPermission()
         }
+        askAddTile()
         finish()
+    }
+
+    @SuppressLint("WrongConstant") // Android 13+, to ask registration for new system bar tile
+    private fun askAddTile(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            if(app().pref.getBoolean(App.PK_TILE_ADDED, true)){
+                val sbm = getSystemService(Context.STATUS_BAR_SERVICE) as StatusBarManager
+                sbm.requestAddTileService(
+                    ComponentName(this, SettingTileService::class.java),
+                    getString(R.string.app_name),
+                    Icon.createWithResource(this, R.drawable.ic_launcher_foreground),
+                    mainExecutor,
+                ){
+                    if(it == StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_ADDED || it == StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_ALREADY_ADDED){
+                        app().pref.edit().putBoolean(App.PK_TILE_ADDED, true).apply()
+                    }
+                }
+            }
+        }
     }
 
     private fun startServices(){

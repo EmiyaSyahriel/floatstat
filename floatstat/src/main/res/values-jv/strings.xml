@@ -27,4 +27,9 @@
     <string name="float_stat_notif_edit">Ubah</string>
     <string name="float_stat_notif_close">Tutup</string>
     <string name="selector_hide_on_tap">Singitaken ps. Tap</string>
+    <string name="tile_visibility_pending">Ngeganti kekaton…</string>
+    <string name="tile_visibility_visible">Tap kanggo ndelikna</string>
+    <string name="tile_visibility_hidden">Tap kanggo ngatokna</string>
+    <string name="tile_started_pending">Ngelekasi…</string>
+    <string name="tile_started_no">Tap terus tahan kanggo ngelekasi</string>
 </resources>
