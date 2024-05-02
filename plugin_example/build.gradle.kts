@@ -33,6 +33,6 @@ android {
 }
 
 dependencies {
-    implementation (":floatstat_lib")
+    implementation(project(mapOf("path" to ":floatstat_lib")))
     implementation ("androidx.core:core:1.7.0")
 }
