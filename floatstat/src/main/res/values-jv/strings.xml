@@ -3,7 +3,8 @@
     <string name="app_name">Kondilayang</string>
     <string name="svc_name">Layanan Chendela Kondilayang</string>
     <string name="err_not_yet_allowed">Aplikasi dereng angsal izin kaagem muncul wonten inggilipun aplikasi lintu.</string>
-    <string name="allow_please">Panyuwunipun kaagem ngangsali aplikasi niki kanggo muncul wonton inggilipun aplikasi lintu.</string>
+    <string name="allow_overlay_please">Panyuwunipun kaagem ngangsali aplikasi niki kanggo muncul wonton inggilipun aplikasi lintu.</string>
+    <string name="allow_notification_please">Panyuwunipun kaagem ngangsali aplikasi niki kanggo ngirim notifikasi.</string>
     <string name="temperamon_start">Nglekasi Kondilayang, sedayaning kendali wonten ing Bilah Pemberitahuan sakmenika mboten sampean singitna.</string>
     <string name="internal_plugin_name">Gawan</string>
     <string name="notif_channel_id">Kendali Kondilayang</string>

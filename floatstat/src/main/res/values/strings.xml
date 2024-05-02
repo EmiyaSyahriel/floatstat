@@ -2,7 +2,8 @@
     <string name="app_name">Floating Stat</string>
     <string name="svc_name">Floating Stat Window Service</string>
     <string name="err_not_yet_allowed">App is not yet allowed to display over other app</string>
-    <string name="allow_please">Please allow this app to be displayed over other apps</string>
+    <string name="allow_overlay_please">Please allow this app to be displayed over other apps</string>
+    <string name="allow_notification_please">Please allow this app to post notification</string>
     <string name="temperamon_start">Starting Floating Stats, all controls are available on Notification Bar unless you hide it.</string>
     <string name="notif_channel_id">Floating Window Control</string>
     <string name="internal_plugin_name">Internal</string>

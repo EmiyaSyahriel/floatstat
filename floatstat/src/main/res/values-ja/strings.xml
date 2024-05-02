@@ -5,7 +5,8 @@
     <string name="internal_plugin_name">内部</string>
     <string name="notif_channel_id">フローティングウィンドウコントロール</string>
     <string name="temperamon_start">FloatStatを開始すると、非表示にしない限り、通知バーですべてのコントロールを使用できます。</string>
-    <string name="allow_please">このアプリが他のアプリの上に表示されることを許可してください</string>
+    <string name="allow_overlay_please">このアプリが他のアプリの上に表示されることを許可してください</string>
+    <string name="allow_notification_please">このアプリケーションが通知を送信できるようにしてください</string>
     <string name="err_not_yet_allowed">アプリを他のアプリの上に表示することはまだ許可されていません</string>
     <string name="internal_stat_uplink">アップロードの速さ</string>
     <string name="internal_stat_battery_info">バッテリーレベル</string>

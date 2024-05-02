@@ -3,7 +3,8 @@
     <string name="app_name">Kondilayang</string>
     <string name="svc_name">Layanan Jendela Kondilayang</string>
     <string name="err_not_yet_allowed">Aplikasi belum diizinkan untuk berjalan diatas aplikasi lain</string>
-    <string name="allow_please">Mohon untuk memperbolehkan aplikasi ini untuk berjalan diatas aplikasi lain</string>
+    <string name="allow_overlay_please">Mohon untuk memperbolehkan aplikasi ini untuk tampil diatas aplikasi lain</string>
+    <string name="allow_notification_please">Mohon untuk memperbolehkan aplikasi ini untuk mengirim notifikasi</string>
     <string name="temperamon_start">Memulai Kondilayang, semua kendali ada di Bilah Pemberitahuan, kecuali kalau anda sembunyikan.</string>
     <string name="notif_channel_id">Kendali Kondilayang</string>
     <string name="internal_plugin_name">Bawaan</string>

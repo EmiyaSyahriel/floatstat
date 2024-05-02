@@ -61,7 +61,15 @@ class MainActivity : Activity() {
     private fun askPermission() {
         if(sdkAtLeast(Build.VERSION_CODES.M)){
             val i = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
-            Toast.makeText(applicationContext, getString(R.string.allow_please), Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, getString(R.string.allow_overlay_please), Toast.LENGTH_LONG).show()
+            startActivityForResult(i, SYSTEM_ALERT_PERMISSION)
+        }
+
+        if(sdkAtLeast(Build.VERSION_CODES.TIRAMISU)){
+            val i = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+            Toast.makeText(applicationContext, getString(R.string.allow_notification_please), Toast.LENGTH_LONG).show()
             startActivityForResult(i, SYSTEM_ALERT_PERMISSION)
         }
     }

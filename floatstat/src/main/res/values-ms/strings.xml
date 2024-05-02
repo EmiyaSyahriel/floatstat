@@ -3,7 +3,8 @@
     <string name="app_name">StatLayang</string>
     <string name="svc_name">Perkhidmatan Tingkap StatLayang</string>
     <string name="err_not_yet_allowed">Apl belum dibenarkan untuk dipaparkan di atas apl lain</string>
-    <string name="allow_please">Sila benarkan apl ini dipaparkan di atas apl lain</string>
+    <string name="allow_overlay_please">Sila benarkan apl ini dipaparkan di atas apl lain</string>
+    <string name="allow_notification_please">Sila benarkan apl ini guna hantar pemberitahuan</string>
     <string name="temperamon_start">Memulakan Statistik Terapung, semua kawalan tersedia pada Bar Pemberitahuan melainkan anda menyembunyikannya.</string>
     <string name="notif_channel_id">Kawalan Tingkap Terapung</string>
     <string name="internal_plugin_name">Lalai</string>
