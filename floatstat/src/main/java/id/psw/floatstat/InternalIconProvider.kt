@@ -1,22 +1,10 @@
 package id.psw.floatstat
 
-import android.annotation.SuppressLint
-import android.content.ContentProvider
-import android.content.ContentValues
-import android.database.Cursor
 import android.graphics.Bitmap
 import android.net.Uri
-import android.os.Build
-import android.os.MemoryFile
 import android.os.ParcelFileDescriptor
-import android.os.SharedMemory
-import androidx.core.content.FileProvider
 import id.psw.floatstat.plugins.PluginIconProvider
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.FileDescriptor
-import java.lang.reflect.Method
 
 class InternalIconProvider : PluginIconProvider() {
     companion object {
