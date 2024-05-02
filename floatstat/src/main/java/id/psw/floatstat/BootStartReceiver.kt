@@ -3,10 +3,10 @@ package id.psw.floatstat
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 
 class BootStartReceiver : BroadcastReceiver() {
     companion object {
+        @Suppress("SpellCheckingInspection") // they are vendor-defined APIs!
         private val bootActions : Array<String> = arrayOf(
             Intent.ACTION_BOOT_COMPLETED,
             "android.intent.action.QUICKBOOT_POWERON",

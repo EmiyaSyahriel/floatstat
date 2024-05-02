@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Float Stat"
-include ':floatstat'
-include ':plugin_example'
-include ':floatstat_lib'
+include(":floatstat_lib")
+include(":floatstat")
+include(":plugin_example")

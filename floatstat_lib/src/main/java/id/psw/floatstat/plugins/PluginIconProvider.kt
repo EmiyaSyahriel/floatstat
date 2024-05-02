@@ -17,7 +17,7 @@ abstract class PluginIconProvider : ContentProvider() {
         selection: String?, selectionArgs: Array<out String>?
     ): Int = 0
 
-    var allowWrite = false
+    open var allowWrite = false
 
     abstract fun onRequestFile(path:List<String>?) : ParcelFileDescriptor?
     override fun openFile(uri: Uri, mode: String): ParcelFileDescriptor? {

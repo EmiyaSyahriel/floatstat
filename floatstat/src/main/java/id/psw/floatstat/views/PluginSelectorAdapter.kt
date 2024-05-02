@@ -27,9 +27,9 @@ class PluginSelectorAdapter(
         val isDefault : RadioButton = itemView.findViewById(R.id.selector_as_default)
         val upButton : Button = itemView.findViewById(R.id.up_button)
         val dnButton : Button = itemView.findViewById(R.id.dn_button)
-        var doHandle = true
+        private var doHandle = true
 
-        private fun swap(up:Boolean, btn:Button){
+        private fun swap(up:Boolean){
             val aIdx = bindingAdapterPosition
             val bIdx = aIdx + up.select(-1, 1)
             if(bIdx >= 0 && bIdx < adapter.data.size){
@@ -40,7 +40,7 @@ class PluginSelectorAdapter(
         }
 
         init {
-            isActive.setOnCheckedChangeListener { _, isChecked -> adapter.data[position].isActive = isChecked }
+            isActive.setOnCheckedChangeListener { _, isChecked -> adapter.data[layoutPosition].isActive = isChecked }
             isDefault.setOnCheckedChangeListener { _, _ ->
                 if(doHandle){
                     val lastSelectedItem = adapter.selectedDefault
@@ -49,8 +49,8 @@ class PluginSelectorAdapter(
                     adapter.notifyItemChanged(adapter.selectedDefault)
                 }
             }
-            upButton.setOnClickListener { swap(true, it as Button) }
-            dnButton.setOnClickListener { swap(false,it as Button) }
+            upButton.setOnClickListener { swap(true ) }
+            dnButton.setOnClickListener { swap(false) }
         }
 
         fun doButNotHandled(func: (PluginSelectorViewHolder) -> Unit){

@@ -1,18 +1,10 @@
 package id.psw.floatstat.plugin_example
 
-import android.content.ContentProvider
-import android.content.ContentValues
-import android.database.Cursor
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.os.Parcel
 import android.os.ParcelFileDescriptor
 import android.util.Log
-import androidx.core.content.FileProvider
 import id.psw.floatstat.plugins.PluginIconProvider
 import java.io.File
 
@@ -33,6 +25,7 @@ class IconProvider : PluginIconProvider() {
 
     private val fileName = mutableMapOf<Int, File>()
 
+    @Suppress("DEPRECATION") // We do not need themes!
     private fun writeBitmapToFile(resId:Int, cacheDir:File?){
         if(fileName.containsKey(resId)) return
         val outFile = File.createTempFile("tmp", ".png", cacheDir)

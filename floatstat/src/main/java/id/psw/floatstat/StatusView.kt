@@ -8,7 +8,6 @@ import androidx.core.graphics.withClip
 import androidx.core.graphics.withScale
 import androidx.core.graphics.withTranslation
 
-@Suppress("DEPRECATION")
 class StatusView @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
@@ -16,7 +15,6 @@ class StatusView @JvmOverloads constructor(
 ) : View(context, attributeSet, defStyleAttr) {
 
     companion object{
-        private const val degree = '°'
         private var LINE_HEIGHT = 20.0f
         private const val PADDING = 5.0f
     }

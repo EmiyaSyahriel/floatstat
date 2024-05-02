@@ -25,6 +25,8 @@ class App : Application() {
     var isFloatServiceRunning = false
     var isFloatWindowVisible = true
 
+    @Suppress("SpellCheckingInspection") // They are intentionally mispelled so that each
+                                                 // are uniquely identifiable.
     companion object {
         private val speedClassByte = arrayOf("B","k","MB","GB","TB","PB","EB","ZB","YB")
         private val speedClassBit = arrayOf("b","Kb","Mb","Gb","Tb","Pb","Eb","Zb","Yb")
@@ -109,6 +111,7 @@ class App : Application() {
                                 it.icon?.recycle()
                                 it.icon = BitmapFactory.decodeFileDescriptor(ofd.fileDescriptor)
                             }
+                            ofd?.close()
                         } catch (rte: RuntimeException) {
                             rte.printStackTrace()
                         }
@@ -140,7 +143,7 @@ class App : Application() {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             hasBound = true
             if(service != null && name != null){
-                val asPlugin = IFloatStatDataPlugin.Stub.asInterface(service)
+                val asPlugin = IFloatStatDataPlugin_Proxy(service)
                 if(pluginList.indexOfFirst { it.name == name } < 0){
                     val pluginDspName = displayNames[name] ?: name.toString()
                     Log.d(TAG, "$name -> $pluginDspName")
@@ -170,7 +173,7 @@ class App : Application() {
         val i = Intent(ACTION_START_PLUGIN).addCategory(CATEGORY_PLUGIN)
         val dPkg = if (Build.VERSION.SDK_INT >= 33) {
             packageManager.queryIntentServices(i, PackageManager.ResolveInfoFlags.of(0L))
-        } else {
+        } else @Suppress("DEPRECATION") { // Shut up! this is for older device the API did not even care anymore!
             packageManager.queryIntentServices(i, 0)
         }
         if(pluginConnector.hasBound){
@@ -214,7 +217,7 @@ class App : Application() {
         }
 
 
-    var reReadPreference = false
+    private var reReadPreference = false
     val activePlugins = arrayListOf<PluginId>()
     var defaultPlugin = PluginId("","")
     var hideOnTap = false
@@ -285,7 +288,7 @@ class App : Application() {
         }
     }
 
-    var onMemoryCleaning = ArrayList<(Int) -> Unit>()
+    private var onMemoryCleaning = ArrayList<(Int) -> Unit>()
 
     override fun onTrimMemory(level: Int) {
         onMemoryCleaning.forEach {
@@ -298,7 +301,7 @@ class App : Application() {
         savePreferences()
         keepRunning = false
         clearPlugins()
-        Log.d("App", "Temperamon terminating...")
+        Log.d("App", "FloatStat terminating...")
         super.onTerminate()
     }
 

@@ -2,13 +2,11 @@ package id.psw.floatstat
 
 import android.annotation.SuppressLint
 import android.app.*
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.*
 import android.os.*
-import android.service.quicksettings.TileService
 import android.view.*
 import android.widget.ImageButton
 import android.widget.PopupMenu
@@ -23,23 +21,21 @@ import id.psw.floatstat.views.PluginSelectorItem
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.concurrent.schedule
-import kotlin.concurrent.timer
-import kotlin.system.exitProcess
 
 class FloatWindowService : Service() {
 
     companion object {
-        const val NOTIF_ID = "_psw_temperamon_"
-        const val NOTIF_INT_ID = 8914
+        const val NOTIFICATION_ID = "_psw_floatstat_"
+        const val NOTIFICATION_INT_ID = 8914
         const val INT_ACTION_VISIBILITY = 1098
         const val INT_ACTION_EDIT = 1099
         const val INT_ACTION_CLOSE = 1100
         const val INT_ACTION_EXPAND = 1101
-        const val ACTION_VISIBILITY = "id.psw.temperamon.action.VISIBILITY"
-        const val ACTION_EDIT = "id.psw.temperamon.action.EDIT"
-        const val ACTION_CLOSE = "id.psw.temperamon.action.CLOSE"
-        const val ACTION_EXPAND = "id.psw.temperamon.action.EXPAND"
-        private const val allowEditor: Boolean = true
+        const val ACTION_VISIBILITY = "id.psw.floatstat.action.VISIBILITY"
+        const val ACTION_EDIT = "id.psw.floatstat.action.EDIT"
+        const val ACTION_CLOSE = "id.psw.floatstat.action.CLOSE"
+        const val ACTION_EXPAND = "id.psw.floatstat.action.EXPAND"
+        private const val ALLOW_EDITOR: Boolean = true
 
         fun startServiceS(ctx: Context){
             val i = Intent(ctx, FloatWindowService::class.java)
@@ -71,7 +67,9 @@ class FloatWindowService : Service() {
 
         slop = ViewConfiguration.get(this).scaledTouchSlop
         val viewType = if(sdkAtLeast(Build.VERSION_CODES.O))
-            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY else WindowManager.LayoutParams.TYPE_PHONE
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY else
+                @Suppress("DEPRECATION") // Old SDK that not supported yet
+                WindowManager.LayoutParams.TYPE_PHONE
 
         w = resources.displayMetrics.widthPixels / 2
         h = resources.displayMetrics.heightPixels / 2
@@ -154,12 +152,12 @@ class FloatWindowService : Service() {
     private fun createNotification(){
         val notifMan = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val notifChan = NotificationChannel(NOTIF_ID, getString(R.string.notif_channel_id), NotificationManager.IMPORTANCE_LOW)
+            val notifChan = NotificationChannel(NOTIFICATION_ID, getString(R.string.notif_channel_id), NotificationManager.IMPORTANCE_LOW)
             notifMan.createNotificationChannel(notifChan)
         }
         val notifFlag = if(sdkAtLeast(Build.VERSION_CODES.M)) PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT else 0
 
-        val notif = NotificationCompat.Builder(this, NOTIF_ID)
+        val notif = NotificationCompat.Builder(this, NOTIFICATION_ID)
             .setContentTitle(getString(R.string.float_stat_notif_title))
             .setContentText(getString(R.string.float_stat_notif_desc))
             .setSmallIcon(R.drawable.ic_main_notification)
@@ -178,10 +176,10 @@ class FloatWindowService : Service() {
             .build()
         vNotif = notif
         notif.flags = Notification.FLAG_NO_CLEAR or Notification.FLAG_ONGOING_EVENT
-        notifMan.notify(NOTIF_INT_ID, notif)
+        notifMan.notify(NOTIFICATION_INT_ID, notif)
         vNotifMan = notifMan
 
-        startForeground(NOTIF_INT_ID, notif)
+        startForeground(NOTIFICATION_INT_ID, notif)
     }
 
     override fun onCreate() {
@@ -237,7 +235,7 @@ class FloatWindowService : Service() {
         applicationContext.setTheme(ic)
         val dlgBuilder = AlertDialog.Builder(applicationContext, ic)
         var selectorRView : RecyclerView? = null
-        if(allowEditor){
+        if(ALLOW_EDITOR){
             selectorRView = RecyclerView(applicationContext)
             val dataList = arrayListOf<PluginSelectorItem>()
 
@@ -361,7 +359,7 @@ class FloatWindowService : Service() {
         if(vMainView != null){
             vWinMan?.removeView(vMainView)
         }
-        vNotifMan?.cancel(NOTIF_INT_ID)
+        vNotifMan?.cancel(NOTIFICATION_INT_ID)
     }
 
 }

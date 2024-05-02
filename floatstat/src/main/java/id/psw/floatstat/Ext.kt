@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Build
 
 fun sdkAtLeast(ver: Int) : Boolean = Build.VERSION.SDK_INT >= ver
-fun sdkGreaterThan(ver: Int) : Boolean = Build.VERSION.SDK_INT > ver
 
 fun Context.app() : App {
     return if(this is App) this

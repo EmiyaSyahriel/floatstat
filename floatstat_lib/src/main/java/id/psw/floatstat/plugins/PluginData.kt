@@ -33,6 +33,7 @@ class PluginData() : Parcelable {
         if(iconColor.updated) iconColor.value = parcel.readInt()
     }
 
+    @Suppress("KotlinConstantConditions") // Allow the code to be more comprehensible!
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         var flag : Byte = 0
         if(textValue.updated) flag = flag addFlag FLAG_TEXT_VALUE_UPDATE
