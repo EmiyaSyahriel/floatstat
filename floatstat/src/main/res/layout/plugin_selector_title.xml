@@ -29,5 +29,5 @@
         android:contentDescription="@string/what_what"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_menu"
-        app:srcCompat="@drawable/ic_menu" />
+        />
 </RelativeLayout>

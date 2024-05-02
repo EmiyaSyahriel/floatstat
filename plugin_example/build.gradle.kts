@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "id.psw.floatstat.plugin_example"
-    compileSdk = 31
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "id.psw.floatstat.plugin_example"
         minSdk = 19
-        targetSdk = 31
+        targetSdk = 34
         versionCode = 1
         versionName ="1.0"
 
@@ -30,9 +30,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    androidResources {
+        generateLocaleConfig = true
+    }
 }
 
 dependencies {
     implementation(project(mapOf("path" to ":floatstat_lib")))
-    implementation ("androidx.core:core:1.7.0")
 }

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="id.psw.floatstat">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"
+        tools:ignore="SystemPermissionTypo" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <!-- No Android Go or Android devices identifying itself as Low RAM which is introduced since API 27,
         Since they usually did not support floating window -->
@@ -53,6 +56,7 @@
             android:enabled="true"
             android:label="@string/svc_name"
             android:exported="false"
+            android:foregroundServiceType="dataSync"
             >
             <intent-filter>
                 <action android:name="id.psw.temperamon.action.VISIBILITY"/>

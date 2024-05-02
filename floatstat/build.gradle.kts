@@ -5,21 +5,21 @@ plugins {
 
 android {
     namespace = "id.psw.floatstat"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "id.psw.floatstat"
         minSdk = 19
-        targetSdk = 33
-        versionCode = 3
-        versionName = "1.0.2"
+        targetSdk = 34
+        versionCode = 4
+        versionName = "1.0.4"
 
         testInstrumentationRunner= "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -30,13 +30,17 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    androidResources {
+        generateLocaleConfig = true
+    }
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.1")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.core:core:1.13.1")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation(project(mapOf("path" to ":floatstat_lib")))
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
