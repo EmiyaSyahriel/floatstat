@@ -59,9 +59,9 @@
             android:foregroundServiceType="dataSync"
             >
             <intent-filter>
-                <action android:name="id.psw.temperamon.action.VISIBILITY"/>
-                <action android:name="id.psw.temperamon.action.EDIT"/>
-                <action android:name="id.psw.temperamon.action.CLOSE"/>
+                <action android:name="id.psw.floatstat.action.VISIBILITY"/>
+                <action android:name="id.psw.floatstat.action.EDIT"/>
+                <action android:name="id.psw.floatstat.action.CLOSE"/>
             </intent-filter>
         </service>
         <service android:name=".SettingTileService"
