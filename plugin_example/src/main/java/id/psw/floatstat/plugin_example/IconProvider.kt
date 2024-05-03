@@ -50,11 +50,11 @@ class IconProvider : PluginIconProvider() {
             cacheDir.mkdir()
         }
         (context!!.applicationContext as PluginApp).iconProvider = this
-        arrayOf(
+        for( it in arrayOf(
             R.drawable.ic_plugin_icon,
             R.drawable.ic_plugin_rng,
             R.drawable.ic_plugin_clock,
-        ).forEach {
+        )) {
             writeBitmapToFile(it,cacheDir)
         }
         return true

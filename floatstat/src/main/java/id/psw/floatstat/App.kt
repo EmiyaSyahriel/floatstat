@@ -96,7 +96,7 @@ class App : Application() {
         val dataList : ArrayList<PluginDataInfo> = arrayListOf()){
 
         fun updateData(ctx:App){
-            dataList.forEach {
+            dataList.forEachLA {
                 val eligibleToUpdate = ctx.defaultPlugin.equals(this.name.className, it.id)
                         || ctx.activePlugins.indexOfFirst { pId -> pId.equals(this.name.className, it.id) } >= 0
                 if(eligibleToUpdate) {
@@ -148,7 +148,8 @@ class App : Application() {
                     val pluginDspName = displayNames[name] ?: name.toString()
                     Log.d(TAG, "$name -> $pluginDspName")
                     val vInfo = PluginInfo(asPlugin, name, pluginDspName)
-                    asPlugin.dataIds.split(',').forEach {
+                    val dp = asPlugin.dataIds.split(',')
+                    dp.forEachLA {
                         val dName = asPlugin.getDataName(it)
                         val dInfo = PluginDataInfo(
                             it, dName,
@@ -173,7 +174,7 @@ class App : Application() {
         val i = Intent(ACTION_START_PLUGIN).addCategory(CATEGORY_PLUGIN)
         val dPkg = if (Build.VERSION.SDK_INT >= 33) {
             packageManager.queryIntentServices(i, PackageManager.ResolveInfoFlags.of(0L))
-        } else @Suppress("DEPRECATION") { // Shut up! this is for older device the API did not even care anymore!
+        } else { // Shut up! this is for older device the API did not even care anymore!
             packageManager.queryIntentServices(i, 0)
         }
         if(pluginConnector.hasBound){
@@ -182,7 +183,7 @@ class App : Application() {
         }
         pluginList.clear()
 
-        dPkg.forEach {
+        dPkg.forEachLA {
             try{
                 val cName = ComponentName(it.serviceInfo.packageName, it.serviceInfo.name)
                 val sbi = Intent(ACTION_START_PLUGIN)
@@ -230,14 +231,15 @@ class App : Application() {
         if(!pref.contains(PK_ENABLED_PLUGIN)){
             val internalName = InternalStatProviderService::class.java.name
             val sb = StringBuilder()
-            arrayListOf(
+            val arr = arrayListOf(
                 PluginId(internalName,InternalStatProviderService.DAT_TEMP_CPU),
                 PluginId(internalName,InternalStatProviderService.DAT_TEMP_BATTERY),
                 PluginId(internalName,InternalStatProviderService.DAT_RAM_USAGE),
                 PluginId(internalName,InternalStatProviderService.DAT_BATTERY_INFO),
                 PluginId(internalName,InternalStatProviderService.DAT_NET_UPLOAD),
-                PluginId(internalName,InternalStatProviderService.DAT_NET_DNLOAD)
-            ).forEach {
+                PluginId(internalName,InternalStatProviderService.DAT_NET_DNLOAD))
+
+            arr.forEachLA {
                 sb.append(it.toString()).append(',')
             }
             // We need the next command to run after the write finished
@@ -245,10 +247,9 @@ class App : Application() {
         }
         val plugins = pref.getString(PK_ENABLED_PLUGIN,"") ?: ""
         activePlugins.clear()
-        plugins.split(",").forEach {
-            if(it.isNotEmpty()){
-                activePlugins.add(PluginId(it))
-            }
+        plugins.split(",").forEachLA {
+            if(it.isEmpty()) return@forEachLA
+            activePlugins.add(PluginId(it))
         }
         val defPlug = pref.getString(PK_DEFAULT_PLUGIN_DISPLAY, null)
         if(defPlug != null){
@@ -256,11 +257,16 @@ class App : Application() {
         }
         startOnBoot = pref.getBoolean(PK_RUN_ON_STARTUP, false)
         hideOnTap = pref.getBoolean(PK_HIDE_ON_TAP, false)
+
+        // Do GC Periodically
+        System.gc()
     }
 
     fun savePreferences(){
         val activePluginIds = StringBuilder()
-        activePlugins.forEach { activePluginIds.append(it.toString()).append(',') }
+        activePlugins.forEachLA {
+            activePluginIds.append(it.toString()).append(',')
+        }
         pref.edit()
             .putLong(PK_THREADED_UPDATE_FREQ, updateFrequency)
             .putString(PK_ENABLED_PLUGIN, activePluginIds.toString())
@@ -276,9 +282,7 @@ class App : Application() {
         readPreferences()
         listPlugins()
         fixedRateTimer("pluginPoll", false, 1000L, 300L){
-            pluginList.forEach { info ->
-                info.updateData(ctx)
-            }
+            pluginList.forEachLA { info ->  info.updateData(ctx) }
         }
 
         fixedRateTimer("libPrefUpdater", false, 0L, 1000L ){
@@ -291,9 +295,7 @@ class App : Application() {
     private var onMemoryCleaning = ArrayList<(Int) -> Unit>()
 
     override fun onTrimMemory(level: Int) {
-        onMemoryCleaning.forEach {
-            it.invoke(level)
-        }
+        onMemoryCleaning.forEachLA { it.invoke(level) }
         super.onTrimMemory(level)
     }
 
@@ -318,9 +320,8 @@ class App : Application() {
     fun clearPlugins() {
         iconProvider.clearMemFile()
         unbindService(pluginConnector)
-        pluginList.forEach {
-            it.binder.requestStop()
-        }
+
+        pluginList.forEachLA { it.binder.requestStop() }
     }
 
 }

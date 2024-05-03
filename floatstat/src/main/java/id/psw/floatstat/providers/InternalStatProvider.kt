@@ -5,6 +5,8 @@ import id.psw.floatstat.IFloatStatDataPlugin
 import id.psw.floatstat.InternalStatProviderService
 import id.psw.floatstat.R
 import id.psw.floatstat.app
+import id.psw.floatstat.forEachIndexedLA
+import id.psw.floatstat.forEachLA
 import id.psw.floatstat.plugins.PluginData
 import java.lang.StringBuilder
 import java.util.Timer
@@ -34,7 +36,9 @@ class InternalStatProvider(val ctx: InternalStatProviderService) : IFloatStatDat
 
     private fun doUpdate()
     {
-        providers.forEach { it.updateData() }
+        providers.forEachLA{
+            it.updateData()
+        }
 
         if(!keepRunning) return
 
@@ -43,7 +47,7 @@ class InternalStatProvider(val ctx: InternalStatProviderService) : IFloatStatDat
     }
 
     internal fun initialize(){
-        providers.forEach { it.init() }
+        providers.forEachLA { it.init() }
         doUpdate()
     }
 
@@ -91,7 +95,9 @@ class InternalStatProvider(val ctx: InternalStatProviderService) : IFloatStatDat
 
     override fun requestStop() {
         keepRunning = false
-        providers.forEach { it.close() }
+
+        providers.forEachLA { it.close() }
+
         mainTimer.cancel()
         mainTimer.purge()
         ctx.stopSelf()

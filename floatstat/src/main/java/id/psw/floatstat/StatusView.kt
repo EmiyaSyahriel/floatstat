@@ -77,12 +77,14 @@ class StatusView @JvmOverloads constructor(
 
     private fun getMaxPluginDataValueWidth(){
         var maxWidth = 20.0f
-        app.pluginList.forEach { plug ->
-            plug.dataList.forEach {
+
+        app.pluginList.forEachLA{  plug ->
+            plug.dataList.forEachLA {
                 val w = textPaint.measureText(it.value)
                 if(maxWidth < w) maxWidth = w
             }
         }
+
         this.maxWidth = maxWidth + textPaint.textSize
     }
 
@@ -124,8 +126,8 @@ class StatusView @JvmOverloads constructor(
         ctx.drawCircle(15.0f, 15.0f, 15.0f, drawPaint)
         textPaint.textAlign = Paint.Align.CENTER
         var text = ""
-        app.pluginList.forEach { plug ->
-            plug.dataList.forEach { dat ->
+        app.pluginList.forEachLA { plug ->
+            plug.dataList.forEachLA { dat ->
                 if(app.defaultPlugin.equals(plug.name.className, dat.id)){
                     text = dat.value
                     textPaint.color = dat.textTint
@@ -135,6 +137,18 @@ class StatusView @JvmOverloads constructor(
 
         ctx.drawText(text, 15.0f, 13.0f, textPaint, 0.5f)
         textPaint.color = Color.WHITE
+    }
+
+
+    private val duffFilters = mutableMapOf<Int, PorterDuffColorFilter>()
+    private fun porterDuffFilterCache(color:Int) : PorterDuffColorFilter {
+        var d = duffFilters[color]
+        if(d == null) {
+            d = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
+            duffFilters[color] = d
+        }
+
+        return d
     }
 
     private fun onDrawExpanded(ctx:Canvas) {
@@ -147,31 +161,32 @@ class StatusView @JvmOverloads constructor(
         val icLeft = PADDING * 1.0f
         val txLeft = (PADDING * 2.0f) + lineSz
         val app = context.app
-        app.activePlugins.forEachIndexed { i, aPlug ->
-            app.pluginList.firstOrNull {
-                    plug -> plug.name.className == aPlug.pkg
-            }?.also {
-                    plug -> plug.dataList.firstOrNull { dat -> dat.id == aPlug.id }
-                ?.also {
-                    val icTop = PADDING + (i * lineSz)
-                    val icon = it.icon
-                    if(icon != null && !icon.isRecycled){
-                        drawPaint.color = it.iconTint
-                        if(it.iconTint == Color.TRANSPARENT){
-                            drawPaint.colorFilter = null
-                        }else{
-                            drawPaint.colorFilter = PorterDuffColorFilter(it.iconTint, PorterDuff.Mode.SRC_IN)
-                        }
-                        drawRectF.set(
-                            icLeft, icTop,
-                            icLeft + lineSz, icTop + lineSz
-                        )
-                        ctx.drawBitmap(icon, null, drawRectF, drawPaint)
-                    }
-                    textPaint.color = it.textTint
-                    ctx.drawText(it.value, txLeft, icTop + textPaint.textSize, textPaint)
+        app.activePlugins.forEachIndexedLA { i, aPlug ->
+            val plugs = app.pluginList.firstOrNullLA { plug -> plug.name.className == aPlug.pkg }
+                ?: return@forEachIndexedLA
+
+            val dat = plugs.dataList.firstOrNullLA { dat -> dat.id == aPlug.id }
+                ?: return@forEachIndexedLA
+
+            val icTop = PADDING + (i * lineSz)
+            val icon = dat.icon
+            if(icon != null && !icon.isRecycled){
+                drawPaint.color = dat.iconTint
+
+                if(dat.iconTint == Color.TRANSPARENT){
+                    drawPaint.colorFilter = null
+                }else{
+                    drawPaint.colorFilter = porterDuffFilterCache(dat.iconTint)
                 }
+
+                drawRectF.set(
+                    icLeft, icTop,
+                    icLeft + lineSz, icTop + lineSz
+                )
+                ctx.drawBitmap(icon, null, drawRectF, drawPaint)
             }
+            textPaint.color = dat.textTint
+            ctx.drawText(dat.value, txLeft, icTop + textPaint.textSize, textPaint)
         }
     }
 

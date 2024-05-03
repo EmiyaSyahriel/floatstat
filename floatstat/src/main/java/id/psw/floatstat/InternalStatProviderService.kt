@@ -58,11 +58,13 @@ class InternalStatProviderService : Service() {
                 .toBitmap(iconSize * 4, iconSize * 2, Bitmap.Config.ALPHA_8)
         val uvRect = Rect()
         val vpRect = Rect()
-        arrayOf(
+        val kArr = arrayOf(
             arrayOf(IC_BATTERY_LEVEL, IC_BATTERY_CHARGE, IC_BATTERY_LOW, IC_RAM_USAGE),
             arrayOf(IC_DOWNLINK, IC_UPLINK, IC_CPU_TEMP, IC_BAT_TEMP)
-        ).forEachIndexed { yIdx, yArr ->
-            yArr.forEachIndexed { xIdx, id ->
+        )
+
+        kArr.forEachIndexedLA { yIdx, yArr ->
+            yArr.forEachIndexedLA { xIdx, id ->
                 val x = xIdx * iconSize
                 val y = yIdx * iconSize
                 val ctBmp = Bitmap.createBitmap(iconSize, iconSize, Bitmap.Config.ARGB_8888)

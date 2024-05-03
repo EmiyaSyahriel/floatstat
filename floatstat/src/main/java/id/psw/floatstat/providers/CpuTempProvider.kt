@@ -6,6 +6,7 @@ import id.psw.floatstat.plugins.PluginData
 import java.io.File
 import java.io.RandomAccessFile
 import java.lang.Exception
+import id.psw.floatstat.forEachLA
 
 internal class CpuTempProvider(val ctx:InternalStatProviderService) : IProvider(){
     @Volatile private var shouldUpdate = true
@@ -16,7 +17,7 @@ internal class CpuTempProvider(val ctx:InternalStatProviderService) : IProvider(
         val tempData = mutableMapOf<String, Float>()
         val cpuTempData = arrayListOf<Float>()
 
-        thermalDir.list { dir, _ -> dir.isDirectory }?.forEach {
+        thermalDir.list()?.forEachLA {
             try{
                 val ls = File(thermalDir, it)
                 val typeFile = File(ls, "type")
@@ -40,12 +41,15 @@ internal class CpuTempProvider(val ctx:InternalStatProviderService) : IProvider(
 
             }catch(_: Exception){}
         }
+
         cpuTempData.clear()
-        tempData.forEach {
-            if(it.key.contains("tz")){
-                cpuTempData.add(it.value)
+
+        tempData.forEachLA { k, v ->
+            if(k.contains("tz")){
+                cpuTempData.add(v)
             }
         }
+
         tSenseSensorTemp = if(cpuTempData.size > 0){
             cpuTempData.average().toFloat()
         }else{

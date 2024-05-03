@@ -34,7 +34,9 @@ class ExampleInstrumentedTest {
     @Test
     fun readTemperature(){
         val thermalDir = File("/sys/class/thermal")
-        thermalDir.list { dir, _ -> dir.isDirectory }?.forEach {
+        val lst = thermalDir.list { dir, _ -> dir.isDirectory }
+        if(lst == null) return
+        for(it in lst) {
             try{
                 val ls = File(thermalDir, it)
                 val typeFile = File(ls, "type")

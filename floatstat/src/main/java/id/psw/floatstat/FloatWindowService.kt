@@ -236,8 +236,8 @@ class FloatWindowService : Service() {
             selectorRView = RecyclerView(applicationContext)
             val dataList = arrayListOf<PluginSelectorItem>()
 
-            app.pluginList.forEach { pg ->
-                pg.dataList.forEach { dt ->
+            app.pluginList.forEachLA { pg ->
+                pg.dataList.forEachLA { dt ->
                     val pDspName = pg.displayName
                     val dDspName = dt.displayName
                     val enabled = app.activePlugins.firstOrNull { aPlug -> aPlug.equals(pg.name.className, dt.id) } != null
@@ -326,7 +326,7 @@ class FloatWindowService : Service() {
 
     private fun saveOrderAndActivation(dataList: ArrayList<PluginSelectorItem>, selectedDefault: Int) {
         app.activePlugins.clear()
-        dataList.filter { it.isActive }.forEach {
+        dataList.filter { it.isActive }.forEachLA {
             app.activePlugins.add(App.PluginId(it.pkgName, it.id))
         }
         if(selectedDefault < dataList.size && selectedDefault >= 0){
