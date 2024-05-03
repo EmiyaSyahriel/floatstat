@@ -5,7 +5,7 @@ import android.os.Build
 
 fun sdkAtLeast(ver: Int) : Boolean = Build.VERSION.SDK_INT >= ver
 
-fun Context.app() : App {
+val Context.app : App get(){
     return if(this is App) this
     else this.applicationContext as App
 }

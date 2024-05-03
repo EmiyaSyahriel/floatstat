@@ -60,8 +60,8 @@ class SettingTileService : TileService() {
         val pending = isChangePending
         t.icon = _cachedIcon
 
-        if(app().isFloatServiceRunning){
-            val isVisible =app().isFloatWindowVisible
+        if(app.isFloatServiceRunning){
+            val isVisible =app.isFloatWindowVisible
             t.state = isVisible.select(Tile.STATE_ACTIVE, Tile.STATE_INACTIVE)
             setDescription(
                 pending.select(getString(R.string.tile_visibility_pending), isVisible.select(getString(
@@ -80,10 +80,10 @@ class SettingTileService : TileService() {
 
     override fun onClick() {
         unlockAndRun {
-            if(app().isFloatServiceRunning){
-                startService(Intent(FloatWindowService.ACTION_VISIBILITY).setClass(app(), FloatWindowService::class.java))
+            if(app.isFloatServiceRunning){
+                startService(Intent(FloatWindowService.ACTION_VISIBILITY).setClass(app, FloatWindowService::class.java))
             }else{
-                FloatWindowService.startServiceS(app())
+                FloatWindowService.startServiceS(app)
             }
             isChangePending = true
             internalUpdateTile()

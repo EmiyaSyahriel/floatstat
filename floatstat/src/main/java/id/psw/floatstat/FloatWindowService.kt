@@ -90,7 +90,6 @@ class FloatWindowService : Service() {
         vWinMan = winMan
 
         mainView.setOnClickListener {
-            val app = app()
             if(app.hideOnTap){
                 vMainView?.visibility = View.GONE
             }else{
@@ -115,7 +114,6 @@ class FloatWindowService : Service() {
                     viewParam.x = if(viewParam.x < 0) -w else w
 
                     if((currentTouch - mainView.initialTouch).length() < slop){ // Is Tap
-                        val app = app()
                         if(app.hideOnTap){
                             vMainView?.visibility = View.GONE
                         }else{
@@ -184,8 +182,8 @@ class FloatWindowService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        app().isFloatServiceRunning = true
-        app().refreshPluginList()
+        app.isFloatServiceRunning = true
+        app.refreshPluginList()
         createNotification()
         createView()
     }
@@ -194,14 +192,14 @@ class FloatWindowService : Service() {
         when(intent?.action){
             ACTION_CLOSE -> {
                 stopSelf()
-                if(sdkAtLeast(Build.VERSION_CODES.N)) SettingTileService.update(app())
-                app().clearPlugins()
+                if(sdkAtLeast(Build.VERSION_CODES.N)) SettingTileService.update(app)
+                app.clearPlugins()
             }
             ACTION_EDIT -> {
                 openEditWindow()
             }
             ACTION_VISIBILITY -> {
-                if(app().hideOnTap){
+                if(app.hideOnTap){
                     vMainView?.visibility = View.VISIBLE
                 }else{
                     vMainView?.visibility = when(vMainView?.visibility){
@@ -210,10 +208,10 @@ class FloatWindowService : Service() {
                         else -> View.VISIBLE
                     }
                 }
-                app().isFloatWindowVisible= vMainView?.visibility == View.VISIBLE
+                app.isFloatWindowVisible= vMainView?.visibility == View.VISIBLE
             }
         }
-        if(sdkAtLeast(Build.VERSION_CODES.N)) SettingTileService.update(app())
+        if(sdkAtLeast(Build.VERSION_CODES.N)) SettingTileService.update(app)
         return super.onStartCommand(intent, flags, startId)
     }
 
@@ -231,7 +229,6 @@ class FloatWindowService : Service() {
             isDark.select(AlertDialog.THEME_DEVICE_DEFAULT_DARK, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT)
         }
 
-        val app = app()
         applicationContext.setTheme(ic)
         val dlgBuilder = AlertDialog.Builder(applicationContext, ic)
         var selectorRView : RecyclerView? = null
@@ -271,10 +268,10 @@ class FloatWindowService : Service() {
 
                         setOnMenuItemClickListener {
                             when(it.itemId){
-                                R.id.plugin_selector_donate -> { app().openDonateUri() }
+                                R.id.plugin_selector_donate -> { app.openDonateUri() }
                                 R.id.plugin_selector_refresh -> {
                                     editWindow?.cancel()
-                                    app().refreshPluginList()
+                                    app.refreshPluginList()
                                     Toast.makeText(app, context.getString(R.string.plugin_selector_updating_warning), Toast.LENGTH_LONG).show()
                                     Timer("UpdateWait", false).schedule(1000){
                                         wHandler.post {
@@ -328,7 +325,6 @@ class FloatWindowService : Service() {
     }
 
     private fun saveOrderAndActivation(dataList: ArrayList<PluginSelectorItem>, selectedDefault: Int) {
-        val app = app()
         app.activePlugins.clear()
         dataList.filter { it.isActive }.forEach {
             app.activePlugins.add(App.PluginId(it.pkgName, it.id))
@@ -354,7 +350,7 @@ class FloatWindowService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        app().isFloatServiceRunning = false
+        app.isFloatServiceRunning = false
         Toast.makeText(applicationContext, "Closing View", Toast.LENGTH_SHORT).show()
         if(vMainView != null){
             vWinMan?.removeView(vMainView)

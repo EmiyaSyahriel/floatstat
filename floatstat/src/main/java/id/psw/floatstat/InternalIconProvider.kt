@@ -17,7 +17,7 @@ class InternalIconProvider : PluginIconProvider() {
     private lateinit var cacheDir : File
 
     override fun onCreate(): Boolean {
-        val app = context!!.app()
+        val app = context!!.app
 
         val cDir = app.externalCacheDir ?: app.cacheDir
         cacheDir = File(cDir, "icon_caches")

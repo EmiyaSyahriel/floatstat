@@ -38,7 +38,7 @@ class InternalStatProvider(val ctx: InternalStatProviderService) : IFloatStatDat
 
         if(!keepRunning) return
 
-        val update = ctx.app().pref.getLong(PK_UPDATE_RATE, 100L).coerceAtLeast(UPDATE_RATE_LOWEST)
+        val update = ctx.app.pref.getLong(PK_UPDATE_RATE, 100L).coerceAtLeast(UPDATE_RATE_LOWEST)
         mainTimer.schedule( timerTask { doUpdate() }, update)
     }
 

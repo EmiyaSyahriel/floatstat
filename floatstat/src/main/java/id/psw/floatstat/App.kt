@@ -116,19 +116,19 @@ class App : Application() {
                             rte.printStackTrace()
                         }
                         it.iconUri = dData.iconValue.value
-                        ctx.app().shouldUpdate = true
+                        ctx.app.shouldUpdate = true
                     }
                     if (dData.iconColor.updated) {
                         it.iconTint = dData.iconColor.value
-                        ctx.app().shouldUpdate = true
+                        ctx.app.shouldUpdate = true
                     }
                     if (dData.textColor.updated) {
                         it.textTint = dData.textColor.value
-                        ctx.app().shouldUpdate = true
+                        ctx.app.shouldUpdate = true
                     }
                     if (dData.textValue.updated) {
                         it.value = dData.textValue.value
-                        ctx.app().shouldUpdate = true
+                        ctx.app.shouldUpdate = true
                     }
                 }
             }

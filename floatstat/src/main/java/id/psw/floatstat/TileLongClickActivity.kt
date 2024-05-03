@@ -11,9 +11,9 @@ import kotlin.concurrent.timer
 class TileLongClickActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(!app().isFloatServiceRunning){
+        if(!app.isFloatServiceRunning){
             startActivity(Intent(this, MainActivity::class.java))
-            Toast.makeText(app(), "Starting service", Toast.LENGTH_SHORT).show()
+            Toast.makeText(app, "Starting service", Toast.LENGTH_SHORT).show()
             Handler(Looper.getMainLooper()).postDelayed ({
                 startEditor()
             }, 3000)

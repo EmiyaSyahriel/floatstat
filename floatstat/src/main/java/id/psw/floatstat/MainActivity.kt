@@ -2,6 +2,7 @@ package id.psw.floatstat
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.NotificationManager
 import android.app.StatusBarManager
 import android.content.ComponentName
 import android.content.Context
@@ -33,7 +34,7 @@ class MainActivity : Activity() {
     @SuppressLint("WrongConstant") // Android 13+, to ask registration for new system bar tile
     private fun askAddTile(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
-            if(app().pref.getBoolean(App.PK_TILE_ADDED, true)){
+            if(app.pref.getBoolean(App.PK_TILE_ADDED, true)){
                 val sbm = getSystemService(Context.STATUS_BAR_SERVICE) as StatusBarManager
                 sbm.requestAddTileService(
                     ComponentName(this, SettingTileService::class.java),
@@ -42,7 +43,7 @@ class MainActivity : Activity() {
                     mainExecutor,
                 ){
                     if(it == StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_ADDED || it == StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_ALREADY_ADDED){
-                        app().pref.edit().putBoolean(App.PK_TILE_ADDED, true).apply()
+                        app.pref.edit().putBoolean(App.PK_TILE_ADDED, true).apply()
                     }
                 }
             }
@@ -59,13 +60,15 @@ class MainActivity : Activity() {
     }
 
     private fun askPermission() {
-        if(sdkAtLeast(Build.VERSION_CODES.M)){
+        if(sdkAtLeast(Build.VERSION_CODES.M) && !Settings.canDrawOverlays(this)){
             val i = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
             Toast.makeText(applicationContext, getString(R.string.allow_overlay_please), Toast.LENGTH_LONG).show()
             startActivityForResult(i, SYSTEM_ALERT_PERMISSION)
         }
 
-        if(sdkAtLeast(Build.VERSION_CODES.TIRAMISU)){
+        val notifyMan = (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
+
+        if(sdkAtLeast(Build.VERSION_CODES.TIRAMISU) && !notifyMan.areNotificationsEnabled()){
             val i = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
@@ -90,6 +93,11 @@ class MainActivity : Activity() {
         var permitted= true
         if(sdkAtLeast(Build.VERSION_CODES.M)){
             permitted = Settings.canDrawOverlays(this)
+        }
+
+        if(sdkAtLeast(Build.VERSION_CODES.TIRAMISU)){
+            val notifyMan = (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
+            permitted = permitted && notifyMan.areNotificationsEnabled()
         }
         return permitted
     }

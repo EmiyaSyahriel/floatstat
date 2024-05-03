@@ -53,8 +53,9 @@ class InternalStatProviderService : Service() {
         val density = resources.displayMetrics.density
         val iconSize = (64 * density).toInt()
 
-        val atlas =
-            resources.getDrawable(R.drawable.sheet_icons).toBitmap(iconSize * 4, iconSize * 2, Bitmap.Config.ALPHA_8)
+        @Suppress("DEPRECATION") val atlas =
+            resources.getDrawable(R.drawable.sheet_icons)
+                .toBitmap(iconSize * 4, iconSize * 2, Bitmap.Config.ALPHA_8)
         val uvRect = Rect()
         val vpRect = Rect()
         arrayOf(
@@ -69,7 +70,7 @@ class InternalStatProviderService : Service() {
                 uvRect.set(x, y, x + iconSize, y + iconSize)
                 vpRect.set(0,0,iconSize,iconSize)
                 drawCnv.drawBitmap(atlas, uvRect, vpRect, null)
-                iconUris[id] = app().iconProvider.registerIcon(id, ctBmp)
+                iconUris[id] = app.iconProvider.registerIcon(id, ctBmp)
             }
         }
     }

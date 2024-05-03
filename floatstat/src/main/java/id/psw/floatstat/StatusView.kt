@@ -36,7 +36,7 @@ class StatusView @JvmOverloads constructor(
     var isDragged = false
     val initialPosition = Point()
     val initialTouch = PointF()
-    private val app = context.app()
+    private val app = context.app
 
     private fun si(i: Int) : Int = (resources.displayMetrics.density * i).toInt()
     private fun sf(i: Float) : Int = (resources.displayMetrics.density * i).toInt()
@@ -146,7 +146,7 @@ class StatusView @JvmOverloads constructor(
         LINE_HEIGHT = lineSz
         val icLeft = PADDING * 1.0f
         val txLeft = (PADDING * 2.0f) + lineSz
-        val app = context.app()
+        val app = context.app
         app.activePlugins.forEachIndexed { i, aPlug ->
             app.pluginList.firstOrNull {
                     plug -> plug.name.className == aPlug.pkg
